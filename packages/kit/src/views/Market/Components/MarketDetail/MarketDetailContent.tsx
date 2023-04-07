@@ -1,0 +1,150 @@
+import type { FC } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
+
+import { useNavigation } from '@react-navigation/core';
+import { useIntl } from 'react-intl';
+import { RefreshControl } from 'react-native';
+
+import {
+  Box,
+  Button,
+  ScrollView,
+  useIsVerticalLayout,
+  useSafeAreaInsets,
+} from '@onekeyhq/components';
+import backgroundApiProxy from '@onekeyhq/kit/src/background/instance/backgroundApiProxy';
+import type { MarketTokenDetail } from '@onekeyhq/kit/src/store/reducers/market';
+import { SWAP_TAB_NAME } from '@onekeyhq/kit/src/store/reducers/market';
+
+import { useMarketTokenItem } from '../../hooks/useMarketToken';
+
+import { MarketDetailComponent } from './MarketDetailComponent';
+import MarketPriceChart from './MarketPriceChart';
+
+const MarketDetailActionButton = ({
+  marketTokenId,
+}: {
+  marketTokenId: string;
+}) => {
+  const intl = useIntl();
+  const marketTokenItem = useMarketTokenItem({ coingeckoId: marketTokenId });
+  const navigation = useNavigation();
+  const onBack = useCallback(() => {
+    backgroundApiProxy.serviceMarket.switchMarketTopTab(SWAP_TAB_NAME);
+    if (navigation?.canGoBack?.()) {
+      navigation?.goBack();
+    }
+  }, [navigation]);
+  const isDisabledSwap = useMemo(
+    () => !marketTokenItem?.tokens?.length,
+    [marketTokenItem],
+  );
+  return (
+    <Box flexDirection="row" alignItems="center" pt="24px">
+      <Button
+        flex={1}
+        type="basic"
+        size="lg"
+        onPress={() => {
+          if (marketTokenItem?.tokens?.length) {
+            backgroundApiProxy.serviceSwap.buyToken(marketTokenItem.tokens[0]);
+            onBack();
+          }
+        }}
+        isDisabled={isDisabledSwap}
+      >
+        {intl.formatMessage({ id: 'action__buy' })}
+      </Button>
+      <Button
+        flex={1}
+        ml={2}
+        type="basic"
+        size="lg"
+        onPress={() => {
+          if (marketTokenItem?.tokens?.length) {
+            backgroundApiProxy.serviceSwap.sellToken(marketTokenItem.tokens[0]);
+            onBack();
+          }
+        }}
+        isDisabled={isDisabledSwap}
+      >
+        {intl.formatMessage({ id: 'action__sell' })}
+      </Button>
+      {/* <IconButton
+        ml={2}
+        name="DotsHorizontalMini"
+        onPress={() => {
+          if (marketTokenItem) {
+            showMarketDetailActionMoreMenu(marketTokenItem, {
+              header: intl.formatMessage({ id: 'action__more' }),
+            });
+          }
+        }}
+        isDisabled={!marketTokenItem}
+      /> */}
+    </Box>
+  );
+};
+
+type MarketDetailTabsProps = {
+  marketTokenId: string;
+  tokenDetail?: MarketTokenDetail;
+};
+
+const MarketDetailContent: FC<MarketDetailTabsProps> = ({
+  marketTokenId,
+  tokenDetail,
+}) => {
+  const { bottom } = useSafeAreaInsets();
+  const isVerticalLayout = useIsVerticalLayout();
+  const [refreshing, setRefreshing] = useState(false);
+  const contentPadding = isVerticalLayout ? '16px' : '0px';
+
+  const onRefresh = useCallback(async () => {
+    setRefreshing(true);
+    await backgroundApiProxy.serviceMarket.fetchMarketDetail(marketTokenId);
+    setRefreshing(false);
+  }, [marketTokenId]);
+
+  return (
+    <ScrollView
+      contentContainerStyle={{ paddingBottom: bottom }}
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
+    >
+      <Box
+        w="100%"
+        p={contentPadding}
+        flexDirection="column"
+        bg="background-default"
+      >
+        {isVerticalLayout ? (
+          <>
+            <MarketPriceChart coingeckoId={marketTokenId} />
+            <MarketDetailActionButton marketTokenId={marketTokenId} />
+          </>
+        ) : (
+          <MarketPriceChart coingeckoId={marketTokenId} />
+        )}
+      </Box>
+      <MarketDetailComponent
+        low24h={tokenDetail?.stats?.low24h}
+        high24h={tokenDetail?.stats?.high24h}
+        marketCapDominance={tokenDetail?.stats?.marketCapDominance}
+        marketCapRank={tokenDetail?.stats?.marketCapRank}
+        marketCap={tokenDetail?.stats?.marketCap}
+        volume24h={tokenDetail?.stats?.volume24h}
+        news={tokenDetail?.news}
+        expolorers={tokenDetail?.explorers}
+        about={tokenDetail?.about}
+        links={tokenDetail?.links}
+        atl={tokenDetail?.stats?.atl}
+        ath={tokenDetail?.stats?.ath}
+        px={contentPadding}
+      />
+    </ScrollView>
+  );
+};
+
+export default memo(MarketDetailContent);
