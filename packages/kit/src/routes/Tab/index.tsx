@@ -25,8 +25,8 @@ const TabNavigator = () => {
 
   const tabRoutesList = useMemo(() => {
     let tabs = tabRoutes;
-    if (isVerticalLayout)
-      tabs = tabRoutes.filter((t) => t.name !== TabRoutes.Swap);
+    /*if (isVerticalLayout)
+      tabs = tabRoutes.filter((t) => t.name !== TabRoutes.Swap);*/
     return tabs.map((tab) => (
       <Tab.Screen
         key={tab.name}

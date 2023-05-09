@@ -193,8 +193,8 @@ function normalizeConfig({
   // - Ext do not need devtool sourcemap, use SourceMapDevToolPlugin instead.
   // - building slow
   // config.devtool = 'cheap-module-source-map';
-  config.optimization ?? {};
-  config.optimization.splitChunks ?? {};
+  config.optimization ??= {};
+  config.optimization.splitChunks ??= {};
   config.optimization.splitChunks = {
     chunks: 'all',
     minSize: 100 * 1024,

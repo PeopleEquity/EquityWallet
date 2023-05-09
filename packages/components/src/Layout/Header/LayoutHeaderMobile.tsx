@@ -1,12 +1,36 @@
 import LayoutHeader from './index';
 
-import { HStack, IconButton } from '@onekeyhq/components';
+import {HStack, IconButton, useIsVerticalLayout} from '@onekeyhq/components';
 import { NetworkAccountSelectorTriggerMobile } from '@onekeyhq/kit/src/components/NetworkAccountSelector';
 import WalletSelectorTrigger from '@onekeyhq/kit/src/components/WalletSelector/WalletSelectorTrigger/WalletSelectorTrigger';
 import HomeMoreMenu from '@onekeyhq/kit/src/views/Overlay/HomeMoreMenu';
 import platformEnv from '@onekeyhq/shared/src/platformEnv';
+import { Box } from '@onekeyhq/components';
+import { AccountSelectorTrigger } from '@onekeyhq/kit/src/components/NetworkAccountSelector/triggers/AccountSelectorTrigger';
+import { useActiveWalletAccount } from "@onekeyhq/kit/src/hooks";
 
-const headerLeft = () => <WalletSelectorTrigger />;
+const headerLeft = () => {
+  const { wallet } = useActiveWalletAccount();
+  const isVerticalLayout = useIsVerticalLayout();
+
+  return (
+      <Box
+        display={'flex'}
+        flexDirection={'row'}
+        justifyContent={'left'}
+      >
+        <WalletSelectorTrigger />
+        {
+          !wallet ?
+              null :
+              <AccountSelectorTrigger
+                  type={"plain"}
+                  showAddress={!isVerticalLayout}
+              />
+        }
+      </Box>
+  )
+};
 const headerRight = () => (
   <HStack space={3} alignItems="center">
     <NetworkAccountSelectorTriggerMobile />

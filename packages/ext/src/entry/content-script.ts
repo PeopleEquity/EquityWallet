@@ -17,7 +17,7 @@ import injectedCode from './injected.text-js';
 
 if (process.env.NODE_ENV !== 'production') {
   console.log('==== injected script tag start >>>>>>>', performance.now());
-  console.log('[OneKey RN]: Content script works! ');
+  console.log('[EquityWallet RN]: Content script works! ');
   console.log('   Must reload extension for modifications to take effect.');
 }
 

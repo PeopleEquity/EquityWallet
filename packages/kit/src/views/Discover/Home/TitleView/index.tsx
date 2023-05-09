@@ -70,7 +70,7 @@ export const SectionTitle: FC<SectionTitleProps> = ({
           {t(_title) ?? title}
         </Typography.Heading>
       </Box>
-      <Button
+      {/*<Button
         onPress={() => {
           if (platformEnv.isNative) {
             getAppNavigation().navigate(RootRoutes.Modal, {
@@ -101,7 +101,7 @@ export const SectionTitle: FC<SectionTitleProps> = ({
         textProps={{ color: 'text-subdued' }}
       >
         {intl.formatMessage({ id: 'action__see_all' })}
-      </Button>
+      </Button>*/}
     </Box>
   );
 };

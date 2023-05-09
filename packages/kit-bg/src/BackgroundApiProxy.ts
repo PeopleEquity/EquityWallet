@@ -18,6 +18,7 @@ import type ServiceBootstrap from './services/ServiceBootstrap';
 import type ServiceCloudBackup from './services/ServiceCloudBackup';
 import type ServiceCronJob from './services/ServiceCronJob';
 import type ServiceDapp from './services/ServiceDapp';
+import type ServiceDCS from './services/ServiceDCS';
 import type ServiceDerivationPath from './services/ServiceDerivationPath';
 import type ServiceDiscover from './services/ServiceDiscover';
 import type ServiceExternalAccount from './services/ServiceExternalAccount';
@@ -132,6 +133,10 @@ class BackgroundApiProxy
   serviceDiscover = this._createProxyService(
     'serviceDiscover',
   ) as ServiceDiscover;
+
+  serviceDCS = this._createProxyService(
+      'serviceDCS',
+  ) as ServiceDCS;
 
   serviceMarket = this._createProxyService('serviceMarket') as ServiceMarket;
 

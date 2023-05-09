@@ -42,6 +42,7 @@ import { SWAP_TAB_NAME } from '../../../store/reducers/market';
 import { calculateGains } from '../../../utils/priceUtils';
 import AccountMoreMenu from '../../Overlay/AccountMoreMenu';
 import { showAccountValueSettings } from '../../Overlay/AccountValueSettings';
+import TokenCell from "../AssetsList/TokenCell";
 
 type NavigationProps = ModalScreenProps<ReceiveTokenRoutesParams> &
   ModalScreenProps<SendRoutesParams>;
@@ -85,7 +86,7 @@ const AccountAmountInfo: FC = () => {
     [accountAllValues],
   );
 
-  const changedValueComp = useMemo(() => {
+  /*const changedValueComp = useMemo(() => {
     const { gainNumber, percentageGain, gainTextColor } = calculateGains({
       basePrice: accountAllValues.value24h.toNumber(),
       price: accountAllValues.value.toNumber(),
@@ -104,11 +105,14 @@ const AccountAmountInfo: FC = () => {
         </Typography.Body1Strong>
       </>
     );
-  }, [intl, accountAllValues]);
+  }, [intl, accountAllValues]);*/
 
   return (
     <Box alignItems="flex-start" flex="1">
-      <Box mx="-8px" my="-4px" flexDir="row" alignItems="center">
+      <Box flexDirection="row" alignItems="center" w="full">
+        {summedValueComp}
+      </Box>
+      <Box mx="-8px" my="-4px" flexDir="row" mt={1} alignItems="center">
         <Tooltip
           hasArrow
           placement="top"
@@ -156,12 +160,9 @@ const AccountAmountInfo: FC = () => {
           </Tooltip>
         ) : null}
       </Box>
-      <Box flexDirection="row" alignItems="center" mt={1} w="full">
-        {summedValueComp}
-      </Box>
-      <Box flexDirection="row" mt={1}>
+      {/*<Box flexDirection="row" mt={1}>
         {changedValueComp}
-      </Box>
+      </Box>*/}
     </Box>
   );
 };
@@ -194,16 +195,46 @@ const AccountOption: FC<AccountOptionProps> = ({ isSmallView }) => {
         }
       }
     }
-    if (isVertical) {
+    navigation.getParent()?.navigate(TabRoutes.Swap);
+    /*if (isVertical) {
       backgroundApiProxy.serviceMarket.switchMarketTopTab(SWAP_TAB_NAME);
       navigation.getParent()?.navigate(TabRoutes.Market);
     } else {
       navigation.getParent()?.navigate(TabRoutes.Swap);
-    }
+    }*/
   }, [network, account, navigation, isVertical]);
 
   return (
     <Box flexDirection="row" px={isVertical ? 1 : 0} mx={-3}>
+      <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
+        <IconButton
+            circle
+            size={isSmallView ? 'xl' : 'lg'}
+            name="QrCodeOutline"
+            type="basic"
+            isDisabled={wallet?.type === 'watching' || !account}
+            onPress={() => {
+              navigation.navigate(RootRoutes.Modal, {
+                screen: ModalRoutes.Receive,
+                params: {
+                  screen: ReceiveTokenRoutes.ReceiveToken,
+                  params: {},
+                },
+              });
+            }}
+        />
+        <Typography.CaptionStrong
+            textAlign="center"
+            mt="8px"
+            color={
+              wallet?.type === 'watching' || !account
+                  ? 'text-disabled'
+                  : 'text-default'
+            }
+        >
+          {intl.formatMessage({ id: 'action__receive' })}
+        </Typography.CaptionStrong>
+      </Box>
       <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
         <IconButton
           circle
@@ -232,35 +263,6 @@ const AccountOption: FC<AccountOptionProps> = ({ isSmallView }) => {
         <IconButton
           circle
           size={isSmallView ? 'xl' : 'lg'}
-          name="QrCodeOutline"
-          type="basic"
-          isDisabled={wallet?.type === 'watching' || !account}
-          onPress={() => {
-            navigation.navigate(RootRoutes.Modal, {
-              screen: ModalRoutes.Receive,
-              params: {
-                screen: ReceiveTokenRoutes.ReceiveToken,
-                params: {},
-              },
-            });
-          }}
-        />
-        <Typography.CaptionStrong
-          textAlign="center"
-          mt="8px"
-          color={
-            wallet?.type === 'watching' || !account
-              ? 'text-disabled'
-              : 'text-default'
-          }
-        >
-          {intl.formatMessage({ id: 'action__receive' })}
-        </Typography.CaptionStrong>
-      </Box>
-      <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
-        <IconButton
-          circle
-          size={isSmallView ? 'xl' : 'lg'}
           name="ArrowsRightLeftOutline"
           type="basic"
           isDisabled={wallet?.type === 'watching' || !account}
@@ -278,7 +280,6 @@ const AccountOption: FC<AccountOptionProps> = ({ isSmallView }) => {
           {intl.formatMessage({ id: 'title__swap' })}
         </Typography.CaptionStrong>
       </Box>
-
       <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
         <AccountMoreMenu offset={platformEnv.isNativeAndroid ? 55 : 30}>
           <IconButton
@@ -310,7 +311,7 @@ const AccountInfo = () => {
         w="100%"
         px="16px"
         flexDirection="column"
-        bgColor="background-default"
+        bgColor="surface-subdued"
         h={FIXED_VERTICAL_HEADER_HEIGHT}
       >
         <AccountAmountInfo />
@@ -330,7 +331,7 @@ const AccountInfo = () => {
         flexDirection="row"
         justifyContent="space-between"
         alignItems="center"
-        bgColor="background-default"
+        bgColor="surface-subdued"
       >
         <AccountAmountInfo />
         <AccountOption isSmallView={isSmallView} />

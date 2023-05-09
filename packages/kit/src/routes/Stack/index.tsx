@@ -26,6 +26,18 @@ import { HomeRoutes } from '../types';
 
 import type { HomeRoutesParams, ScreensList } from '../types';
 
+const DCSWealth = createLazyComponent(
+    () => import('@onekeyhq/kit/src/views/DCS/WealthList'),
+);
+
+const DCSTrending = createLazyComponent(
+    () => import('@onekeyhq/kit/src/views/DCS/TrendingList'),
+);
+
+const DCSCurrencies = createLazyComponent(
+    () => import('@onekeyhq/kit/src/views/DCS/CurrenciesList'),
+);
+
 const DAppList = createLazyComponent(
   () => import('@onekeyhq/kit/src/views/Discover/DAppList'),
 );
@@ -208,6 +220,18 @@ export const stackScreenList: ScreensList<HomeRoutes> = [
     name: HomeRoutes.Revoke,
     component: RevokePage,
     alwaysShowBackButton: true,
+  },
+  {
+    name: HomeRoutes.DCSWealth,
+    component: DCSWealth,
+  },
+  {
+    name: HomeRoutes.DCSTrending,
+    component: DCSTrending,
+  },
+  {
+    name: HomeRoutes.DCSCurrencies,
+    component: DCSCurrencies,
   },
   {
     name: HomeRoutes.NFTMarketStatsList,

@@ -157,7 +157,7 @@ export const AppStateUnlock = () => {
               <Box minH={50}>
                 <Icon name="BrandLogoIllus" size={50} />
               </Box>
-              <Typography.DisplayXLarge my="2">OneKey</Typography.DisplayXLarge>
+              <Typography.DisplayXLarge my="2">EquityWallet</Typography.DisplayXLarge>
               <Typography.Body1 color="text-subdued">
                 {intl.formatMessage({
                   id: 'content__the_decentralized_web_awaits',

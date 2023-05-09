@@ -44,7 +44,7 @@ const NavHeader: FC<HeaderProps & Partial<NativeStackHeaderProps>> = ({
 }) => {
   const insets = useSafeAreaInsets();
   const isVertical = useIsVerticalLayout();
-  const bgColor = useThemeValue('background-default');
+  const bgColor = useThemeValue('surface-subdued');
 
   const height = isVertical ? defaultMobileHeight : defaultDesktopHeight;
   const hasLeft = Boolean(back || alwaysShowBackButton || headerLeft);

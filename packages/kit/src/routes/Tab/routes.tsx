@@ -13,6 +13,10 @@ import DiscoverScreen from '@onekeyhq/kit/src/views/Discover';
 import DAppList from '@onekeyhq/kit/src/views/Discover/DAppList';
 import DiscoverHome from '@onekeyhq/kit/src/views/Discover/Home';
 import MyDAppList from '@onekeyhq/kit/src/views/Discover/MyDAppList';
+import DCS from '@onekeyhq/kit/src/views/Dcs/Home';
+import DCSWealthList from '@onekeyhq/kit/src/views/Dcs/WealthList';
+import DCSTrendingList from '@onekeyhq/kit/src/views/Dcs/TrendingList';
+import DCSCurrenciesList from '@onekeyhq/kit/src/views/Dcs/CurrenciesList';
 import OnekeyLiteDetail from '@onekeyhq/kit/src/views/Hardware/OnekeyLite/Detail';
 import MarketScreen from '@onekeyhq/kit/src/views/Market';
 import MarketDetail from '@onekeyhq/kit/src/views/Market/MarketDetail';
@@ -59,6 +63,28 @@ export interface TabRouteConfig {
 
 export const tabRoutes: TabRouteConfig[] = [
   {
+    name: TabRoutes.DCS,
+    component: toFocusedLazy(DCS, {
+      rootTabName: TabRoutes.DCS,
+    }),
+    tabBarIcon: (focused) => (focused ? 'CompassSolid' : 'CompassOutline'),
+    translationId: 'title__explore',
+    children: [
+      {
+        name: HomeRoutes.DCSWealth,
+        component: DCSWealthList,
+      },
+      {
+        name: HomeRoutes.DCSTrending,
+        component: DCSTrendingList,
+      },
+      {
+        name: HomeRoutes.DCSCurrencies,
+        component: DCSCurrenciesList,
+      }
+    ],
+  },
+  {
     name: TabRoutes.Home,
     component: toFocusedLazy(HomeScreen, {
       rootTabName: TabRoutes.Home,
@@ -86,10 +112,10 @@ export const tabRoutes: TabRouteConfig[] = [
         name: HomeRoutes.RevokeRedirect,
         component: RevokeRedirectPage,
       },
-      {
+      /*{
         name: HomeRoutes.NFTMarketCollectionScreen,
         component: NFTMarketCollectionScreen,
-      },
+      },*/
       {
         name: HomeRoutes.NFTPNLScreen,
         component: PNLDetailScreen,
@@ -107,7 +133,7 @@ export const tabRoutes: TabRouteConfig[] = [
       },
     ],
   },
-  {
+  /*{
     name: TabRoutes.Market,
     component: MarketScreen,
     tabBarIcon: (focused) =>
@@ -120,7 +146,7 @@ export const tabRoutes: TabRouteConfig[] = [
         alwaysShowBackButton: true,
       },
     ],
-  },
+  },*/
   {
     name: TabRoutes.Swap,
     component: SwapScreen,
@@ -133,7 +159,7 @@ export const tabRoutes: TabRouteConfig[] = [
       },
     ],
   },
-  {
+  /* {
     name: TabRoutes.NFT,
     component: toFocusedLazy(NFTMarket, {
       rootTabName: TabRoutes.NFT,
@@ -160,7 +186,7 @@ export const tabRoutes: TabRouteConfig[] = [
         i18nTitle: 'action__profit_and_loss',
       },
     ],
-  },
+  }, */
   {
     name: TabRoutes.Discover,
     component: toFocusedLazy(DiscoverScreen, {

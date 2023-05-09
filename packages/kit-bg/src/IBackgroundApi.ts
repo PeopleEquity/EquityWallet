@@ -23,6 +23,7 @@ import type ServiceFiatPay from './services/ServiceFiatPay';
 import type ServiceHardware from './services/ServiceHardware';
 import type ServiceHistory from './services/ServiceHistory';
 import type ServiceHTTP from './services/ServiceHTTP';
+import type ServiceDCS from './services/ServiceDCS';
 import type ServiceMarket from './services/ServiceMarket';
 import type ServiceMigrate from './services/ServiceMigrate';
 import type ServiceNameResolver from './services/ServiceNameResolver';
@@ -93,6 +94,7 @@ export interface IBackgroundApi extends IBackgroundApiBridge {
   serviceBootstrap: ServiceBootstrap;
   serviceRevoke: ServiceRevoke;
   serviceNameResolver: ServiceNameResolver;
+  serviceDCS: ServiceDCS;
   serviceMarket: ServiceMarket;
   serviceSetting: ServiceSetting;
   serviceBatchTransfer: ServiceBatchTransfer;
