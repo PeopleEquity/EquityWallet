@@ -27,15 +27,15 @@ import { HomeRoutes } from '../types';
 import type { HomeRoutesParams, ScreensList } from '../types';
 
 const DCSWealth = createLazyComponent(
-    () => import('@onekeyhq/kit/src/views/DCS/WealthList'),
+    () => import('@onekeyhq/kit/src/views/Dcs/WealthList'),
 );
 
 const DCSTrending = createLazyComponent(
-    () => import('@onekeyhq/kit/src/views/DCS/TrendingList'),
+    () => import('@onekeyhq/kit/src/views/Dcs/TrendingList'),
 );
 
 const DCSCurrencies = createLazyComponent(
-    () => import('@onekeyhq/kit/src/views/DCS/CurrenciesList'),
+    () => import('@onekeyhq/kit/src/views/Dcs/CurrenciesList'),
 );
 
 const DAppList = createLazyComponent(
