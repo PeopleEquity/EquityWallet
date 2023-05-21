@@ -1,19 +1,19 @@
-import { useCallback, useEffect, useState } from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 
 import { useNavigation } from '@react-navigation/core';
 import { useRoute } from '@react-navigation/native';
 import { useIntl } from 'react-intl';
 
 import {
-  Box,
+  Box, Button,
   Divider,
   Hidden,
   Icon,
-  Image,
-  Text,
+  Image, Select,
+  Text, Token, useIsVerticalLayout,
   useUserDevice,
 } from '@onekeyhq/components';
-import ContentHardwareImage from '@onekeyhq/kit/assets/onboarding/welcome_hardware.png';
+import ContentHardwareImage from '@onekeyhq/kit/assets/onboarding/welcome_bg.png';
 import {
   AppUIEventBusNames,
   appUIEventBus,
@@ -39,6 +39,7 @@ import TermsOfService from './TermsOfService';
 import type { IOnboardingRoutesParams } from '../../routes/types';
 import type { RouteProp } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
+import {Row} from "native-base";
 
 type NavigationProps = StackNavigationProp<
   IOnboardingRoutesParams,
@@ -67,6 +68,7 @@ const Welcome = () => {
 
   const context = useOnboardingContext();
   const forceVisibleUnfocused = context?.forceVisibleUnfocused;
+  const isSmallScreen = useIsVerticalLayout();
 
   useEffect(() => {
     (async function () {
@@ -101,10 +103,12 @@ const Welcome = () => {
   // const goBack = useNavigationBack();
   // const insets = useSafeAreaInsets();
 
-  const onPressCreateWallet = useCallback(() => {
+  const onPressCreateWallet = useCallback((type: any) => {
     resetLayoutAnimation();
     backgroundApiProxy.dispatch(setOnBoardingLoadingBehindModal(false));
-    navigation.navigate(EOnboardingRoutes.SetPassword);
+    navigation.navigate(EOnboardingRoutes.SetPassword, {
+      type: type
+    });
   }, [navigation, resetLayoutAnimation]);
   const onPressImportWallet = useCallback(() => {
     resetLayoutAnimation();
@@ -147,6 +151,18 @@ const Welcome = () => {
     setTimeout(() => navigation.navigate(EOnboardingRoutes.ThirdPartyWallet));
   }, [navigation, resetLayoutAnimation]);
 
+  const options = useMemo(() => {
+    return [{
+      title: 'Create Wallet',
+      label: intl.formatMessage({ id: 'action__create_wallet_serect' }),
+      value: 'serect',
+    }, {
+      title: 'Create Wallet',
+      label: intl.formatMessage({ id: 'action__create_wallet_phrase' }),
+      value: 'phrase',
+    },]
+  }, [intl]);
+
   return (
     <>
       <Layout
@@ -156,26 +172,51 @@ const Welcome = () => {
         scaleFade
         disableAnimation={disableAnimation}
       >
-        <Icon name="BrandLogoIllus" size={48} />
-        <Text
-          typography={{ sm: 'DisplayXLarge', md: 'Display2XLarge' }}
-          mt={6}
-          flexGrow={1}
-        >
-          {intl.formatMessage({ id: 'onboarding__landing_welcome_title' })}
-          {'\n'}
-          <Text color="text-subdued">
-            {intl.formatMessage({ id: 'onboarding__landing_welcome_desc' })}
-          </Text>
+        <Box mx={'auto'}>
+          <Icon name="BrandLogoIllus" size={52} />
+        </Box>
+        <Text fontSize={20} lineHeight={28} fontWeight={600} mt={1.5} mx={'auto'} letterSpace={'-0.3px'}>
+          {'EquityWallet'}
         </Text>
+        <Image
+            mx={'auto'}
+            source={ContentHardwareImage}
+            w="320px"
+            h="320px"
+        />
         <Box
           flexDir={{ sm: 'row' }}
           flexWrap={{ sm: 'wrap' }}
-          mt={{ base: isSmallHeight ? 8 : 16, sm: 20 }}
+          mt={{ base: isSmallHeight ? 8 : 66, sm: 20 }}
           mx={-2}
         >
-          <Box flexDirection={{ sm: 'row' }} w={{ sm: '100%' }}>
-            <PressableListItem
+          <Box flexDirection={{ sm: 'row' }} w={{ sm: '100%' }} gap={'16px'} justifyContent={'center'}>
+            <Select
+                containerProps={{
+                  width: '100%',
+                  maxWidth: '350px'
+                }}
+                title={intl.formatMessage({ id: 'action__create_wallet' })}
+                dropdownPosition="top-right"
+                dropdownProps={isSmallScreen ? {} : { minW: '240px' }}
+                headerShown={false}
+                options={options}
+                isTriggerPlain
+                activatable={false}
+                footer={null}
+                onChange={(type) => {
+                  onPressCreateWallet(type)
+                }}
+                renderTrigger={({ onPress }) => (
+                    <Button onPress={onPress} width={'100%'} maxWidth={'350px'} size="xl" type="primary" key="addWallet">
+                      {intl.formatMessage({ id: 'action__create_wallet' })}
+                    </Button>
+                )}
+            />
+            <Button width={'100%'} maxWidth={'350px'} size="xl" type="basic2" onPress={onPressImportWallet} key="importWallet">
+              {intl.formatMessage({ id: 'action__import_wallet' })}
+            </Button>
+            {/*<PressableListItem
               icon="PlusCircleOutline"
               label={intl.formatMessage({
                 id: 'action__create_wallet',
@@ -198,8 +239,8 @@ const Welcome = () => {
               mb={{ base: 6, sm: 0 }}
               roundedTop={{ base: 0, sm: 'xl' }}
               onPress={onPressImportWallet}
-            />
-            <PressableListItem
+            />*/}
+            {/* <PressableListItem
               icon="UsbCableOutline"
               label={intl.formatMessage({
                 id: 'action__connect_hardware_wallet',
@@ -220,10 +261,10 @@ const Welcome = () => {
                   />
                 </Box>
               </Hidden>
-            </PressableListItem>
+            </PressableListItem> */}
           </Box>
         </Box>
-        <Hidden till="sm">
+        {/* <Hidden till="sm">
           <Box flexDirection="row" alignItems="center" mt="24px" mb="-12px">
             <Divider flex={1} />
             <Text mx="14px" typography="Subheading" color="text-disabled">
@@ -231,10 +272,10 @@ const Welcome = () => {
             </Text>
             <Divider flex={1} />
           </Box>
-        </Hidden>
-        <ConnectThirdPartyWallet onPress={onPressThirdPartyWallet} />
+        </Hidden> */}
+        {/* <ConnectThirdPartyWallet onPress={onPressThirdPartyWallet} /> */}
       </Layout>
-      <TermsOfService />
+      {/* <TermsOfService /> */}
     </>
   );
 };

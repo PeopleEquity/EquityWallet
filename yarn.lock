@@ -5377,6 +5377,7 @@ __metadata:
     "@onekeyfe/onekey-cross-webview": 1.1.23
     "@open-wc/webpack-import-meta-loader": ^0.4.7
     "@pmmmwh/react-refresh-webpack-plugin": ^0.5.10
+    "@react-native-community/slider": ^4.4.2
     "@starcoin/starcoin": 2.1.5
     "@types/chrome": ^0.0.161
     "@types/jest": ^29.2.3
@@ -7162,6 +7163,13 @@ __metadata:
   peerDependencies:
     react-native: ">=0.59"
   checksum: e1be3f323c4fab443b55b07b1d43ccf5bead5048598f42a74b6631c2df2e56dd3f06e4a9f65286e230f8f1fd92e290f631bfba15126c0043a3ed98ff9f96c1e3
+  languageName: node
+  linkType: hard
+
+"@react-native-community/slider@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "@react-native-community/slider@npm:4.4.2"
+  checksum: 1ae613f594a8ea9d7243b3125d26b36aab4e4c2dd9eba1bf66c4f31878e74fae055cd35a1babc46b262240885bb61fa321610417bb2a6d9f77a330136ff33293
   languageName: node
   linkType: hard
 

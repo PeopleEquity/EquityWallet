@@ -11,13 +11,14 @@ import { PortalExit } from '@onekeyhq/kit/src/views/Overlay/RootPortal';
 import Box from '../../Box';
 import Icon from '../../Icon';
 import Pressable from '../../Pressable';
+import Text from '../../Text';
 
 import type { ICON_NAMES } from '../../Icon/Icons';
 import type { DeviceState } from '../../Provider/device';
 import type { BottomTabBarProps } from '../BottomTabs/types';
 import type { EdgeInsets } from 'react-native-safe-area-context';
 
-const DEFAULT_TABBAR_HEIGHT = 49;
+const DEFAULT_TABBAR_HEIGHT = 57;
 
 type Options = {
   deviceSize: DeviceState['size'];
@@ -73,7 +74,6 @@ export default function BottomTabBar({
             });
           }
         };
-
         return (
           <Box flex={1} p={1} key={route.name}>
             <Pressable
@@ -97,10 +97,15 @@ export default function BottomTabBar({
             >
               <Icon
                 // @ts-expect-error
-                name={options?.tabBarIcon?.(isActive) as ICON_NAMES}
-                color={isActive ? 'icon-default' : 'icon-subdued'}
-                size={28}
+                name={`${options?.tabBarIcon?.(isActive) as ICON_NAMES}${isActive ? 'Active' : ''}`}
+                color={isActive ? 'icon-actived' : 'icon-default-2'}
+                size={20}
               />
+              <Box style={{zoom: 0.83}}>
+                <Text fontSize={12} color={isActive ? 'icon-actived' : 'icon-default-2'} >
+                  {options?.tabBarLabel}
+                </Text>
+              </Box>
             </Pressable>
           </Box>
         );

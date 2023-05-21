@@ -445,6 +445,95 @@ class ServiceAccount extends ServiceBase {
     return wallet;
   }
 
+  @backgroundMethod()
+  async createSerectHDWallet({
+    password,
+    mnemonic,
+    avatar,
+    dispatchActionDelay,
+    postCreatedDelay,
+    isAutoAddAllNetworkAccounts,
+  }: {
+    password: string;
+    mnemonic?: string;
+    avatar?: Avatar;
+    dispatchActionDelay?: number;
+    postCreatedDelay?: number;
+    isAutoAddAllNetworkAccounts?: boolean;
+  }) {
+    const { dispatch, engine, appSelector, serviceAccount } =
+        this.backgroundApi;
+
+    timelinePerfTrace.mark({
+      name: ETimelinePerfNames.createHDWallet,
+      title: 'serviceAccount.createHDWallet >> start',
+    });
+    const { networkId } = getActiveWalletAccount();
+
+    startTrace('engine.createHDWallet');
+    const wallet = await engine.createSerectHDWallet({
+      password,
+      mnemonic,
+      avatar: avatar ?? randomAvatar(),
+      autoAddAccountNetworkId: networkId,
+      isAutoAddAllNetworkAccounts,
+    });
+    stopTrace('engine.createHDWallet');
+
+    timelinePerfTrace.mark({
+      name: ETimelinePerfNames.createHDWallet,
+      title: 'serviceAccount.createHDWallet >> engine done',
+    });
+
+    const data: { isPasswordSet: boolean } = appSelector((s) => s.data);
+    const status: { boardingCompleted: boolean } = appSelector((s) => s.status);
+    const actions: any[] = [];
+    if (!status.boardingCompleted) {
+      actions.push(setBoardingCompleted());
+    }
+    if (!data.isPasswordSet) {
+      actions.push(passwordSet());
+      actions.push(setEnableAppLock(true));
+    }
+    actions.push(unlock());
+    actions.push(release());
+
+    const wallets = await serviceAccount.initWallets({ noDispatch: true });
+    actions.push(updateWallets(wallets));
+
+    timelinePerfTrace.mark({
+      name: ETimelinePerfNames.createHDWallet,
+      title: 'serviceAccount.createHDWallet >> initWallets DONE',
+    });
+
+    if (dispatchActionDelay) {
+      setTimeout(() => dispatch(...actions), dispatchActionDelay);
+    } else {
+      dispatch(...actions);
+    }
+
+    if (postCreatedDelay) {
+      setTimeout(() => {
+        this.postHDWalletCreated({
+          wallet,
+          password,
+        });
+      }, postCreatedDelay);
+    } else {
+      this.postHDWalletCreated({
+        wallet,
+        password,
+      });
+    }
+
+    timelinePerfTrace.mark({
+      name: ETimelinePerfNames.createHDWallet,
+      title: 'serviceAccount.createHDWallet >> end',
+    });
+
+    return wallet;
+  }
+
   postHDWalletCreated({
     wallet,
     password,

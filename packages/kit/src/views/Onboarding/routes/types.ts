@@ -12,18 +12,30 @@ export type IOnboardingRecoveryPhraseParams = {
   withEnableAuthentication?: boolean;
   mnemonic: string;
 };
+export type IOnboardingRecoverySerectParams = {
+  password: string;
+  withEnableAuthentication?: boolean;
+  serect: string;
+}
 export type IOnboardingBehindTheSceneParams =
   IOnboardingRecoveryPhraseParams & {
     isHardwareCreating?: {
       device: SearchDevice;
       features: IOneKeyDeviceFeatures;
     };
+    type: 'serect' | 'phrase'
     entry?: 'onboarding' | 'walletSelector';
   };
 export type IOnboardingSetPasswordParams = {
+  type: 'phrase' | 'secret'
   disableAnimation?: boolean;
   mnemonic?: string;
 };
+export type IOnboardingSetSecretPasswordParams = {
+  password: string;
+  withEnableAuthentication?: boolean;
+  disableAnimation?: boolean;
+}
 export type IOnboardingConnectWalletParams = {
   disableAnimation?: boolean;
   disableOnboardingDone?: boolean;
@@ -52,8 +64,11 @@ export type IOnboardingRoutesParams = {
   };
 
   [EOnboardingRoutes.SetPassword]: IOnboardingSetPasswordParams | undefined;
+  [EOnboardingRoutes.SetSecretPassword]: IOnboardingSetSecretPasswordParams | undefined;
   [EOnboardingRoutes.RecoveryPhrase]: IOnboardingRecoveryPhraseParams;
+  [EOnboardingRoutes.RecoverySerect]: IOnboardingRecoverySerectParams;
   [EOnboardingRoutes.ShowRecoveryPhrase]: IOnboardingRecoveryPhraseParams;
+  [EOnboardingRoutes.ShowRecoverySerect]: IOnboardingRecoverySerectParams;
   [EOnboardingRoutes.BehindTheScene]: IOnboardingBehindTheSceneParams;
 
   [EOnboardingRoutes.RestoreFromCloud]: undefined;

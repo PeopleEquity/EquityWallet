@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { useCallback, useMemo, useState } from 'react';
-
 import { useIntl } from 'react-intl';
 
 import {
@@ -71,30 +70,34 @@ const ListHeader: FC<{
   const tokenCountOrAddToken = useMemo(
     () =>
       showTokenCount ? (
-        <>
-          <Text
+        <Box ml={2}>
+          {/*<Text
             color="text-subdued"
             typography={{ sm: 'Body1Strong', md: 'Body2Strong' }}
           >
             {accountTokens.length}
-          </Text>
+          </Text>*/}
           <Icon name="ChevronRightMini" color="icon-subdued" />
-        </>
+        </Box>
       ) : (
-        tokenEnabled && (
-          <IconButton
-            size="sm"
-            borderRadius={17}
-            name="PlusMini"
-            bg="action-secondary-default"
-            onPress={() =>
-              navigation.navigate(RootRoutes.Modal, {
-                screen: ModalRoutes.ManageToken,
-                params: { screen: ManageTokenRoutes.Listing },
-              })
-            }
-          />
-        )
+        <Box ml={2}>
+          {
+            tokenEnabled && (
+                <IconButton
+                    size="sm"
+                    borderRadius={17}
+                    name="PlusMini"
+                    bg="action-secondary-default"
+                    onPress={() =>
+                        navigation.navigate(RootRoutes.Modal, {
+                          screen: ModalRoutes.ManageToken,
+                          params: { screen: ManageTokenRoutes.Listing },
+                        })
+                    }
+                />
+            )
+          }
+        </Box>
       ),
     [accountTokens.length, navigation, showTokenCount, tokenEnabled],
   );
@@ -120,7 +123,7 @@ const ListHeader: FC<{
     <Container
       p={4}
       shadow={undefined}
-      borderTopRadius={showRoundTop ? '12px' : 0}
+      borderTopRadius={showRoundTop ? (isVerticalLayout ? '0' :'12px') : 0}
       borderTopWidth={showRoundTop ? 1 : 0}
       borderWidth={1}
       borderBottomWidth={0}
@@ -136,67 +139,55 @@ const ListHeader: FC<{
           : undefined
       }
       flexDirection="column"
-      bg="surface-subdued"
+      bg="background-default"
     >
       <Box
         flexDirection="row"
         alignItems="center"
         justifyContent="space-between"
       >
-        <Box
-          w={iconOuterWidth}
-          h={iconOuterWidth}
-          borderRadius={iconBorderRadius}
-          bg="decorative-icon-one"
-          justifyContent="center"
-          alignItems="center"
-          mr={isVerticalLayout ? '8px' : '12px'}
-        >
-          <Icon
-            size={iconInnerWidth}
-            color="icon-on-primary"
-            name="DatabaseOutline"
-          />
-        </Box>
-        <Text typography={{ sm: 'Body1Strong', md: 'Heading' }}>
-          {intl.formatMessage({
-            id: 'asset__tokens',
-          })}
-        </Text>
-        {!isVerticalLayout && (
-          <Box flexDirection="row" alignItems="center">
-            <Box
-              mx="8px"
-              my="auto"
-              w="4px"
-              h="4px"
-              borderRadius="2px"
-              bg="text-default"
-            />
-            <Text typography={{ sm: 'DisplayLarge', md: 'Heading' }}>
-              {accountTokensValue.isNaN() ? (
-                ' '
-              ) : (
-                <FormatCurrencyNumber decimals={2} value={accountTokensValue} />
-              )}
-            </Text>
-          </Box>
-        )}
-        {rate.isNaN() ? null : <OverviewBadge rate={rate} />}
-        <Box ml="auto" flexDirection="row" alignItems="center">
+        <Box alignItems={'center'} flexDirection="row">
+          <Text fontSize={'12px'} fontWeight={300}>
+            {intl.formatMessage({
+              id: 'asset__tokens',
+            })}
+          </Text>
           {tokenCountOrAddToken}
         </Box>
+        <Box ml="auto" flexDirection="row" alignItems="center">
+          {/*{!isVerticalLayout && (
+              <Box flexDirection="row" alignItems="center">
+                <Box
+                    mx="8px"
+                    my="auto"
+                    w="4px"
+                    h="4px"
+                    borderRadius="2px"
+                    bg="text-default"
+                />
+                <Text typography={{ sm: 'DisplayLarge', md: 'Heading' }}>
+                  {accountTokensValue.isNaN() ? (
+                      ' '
+                  ) : (
+                      <FormatCurrencyNumber decimals={2} value={accountTokensValue} />
+                  )}
+                </Text>
+              </Box>
+          )}*/}
+          <Box flexDirection="column" alignItems="center">
+            <Text fontSize={'12px'} fontWeight={300}>
+              {Number.isNaN(accountTokensValue) ? (
+                  ' '
+              ) : (
+                  <FormatCurrencyNumber decimals={2} value={accountTokensValue} />
+              )}
+            </Text>
+            {/* {rate.isNaN() ? null : <OverviewBadge rate={rate} />} */}
+          </Box>
+        </Box>
       </Box>
-      <Box mt={isVerticalLayout ? '8px' : '16px'}>
-        {isVerticalLayout ? (
-          <Text typography={{ sm: 'DisplayLarge', md: 'Heading' }}>
-            {Number.isNaN(accountTokensValue) ? (
-              ' '
-            ) : (
-              <FormatCurrencyNumber decimals={2} value={accountTokensValue} />
-            )}
-          </Text>
-        ) : (
+      <Box mt={isVerticalLayout ? '0px' : '16px'}>
+        {isVerticalLayout ? null : (
           <Box flexDirection="row" w="full">
             <Typography.Subheading color="text-subdued" flex={1}>
               {intl.formatMessage({ id: 'title__assets' })}
@@ -287,12 +278,11 @@ const AssetsListHeader: FC<{
           flexDirection="row"
           justifyContent="space-between"
           alignItems="center"
-          pb={3}
         >
-          <Typography.Heading>
+          {/* <Typography.Heading>
             {intl.formatMessage({ id: 'title__assets' })}
-          </Typography.Heading>
-          {tokenEnabled && (
+          </Typography.Heading> */}
+          {/*{tokenEnabled && (
             <HStack alignItems="center" justifyContent="flex-end">
               {refreshButton}
               <IconButton
@@ -316,7 +306,7 @@ const AssetsListHeader: FC<{
                 mr={-2}
               />
             </HStack>
-          )}
+          )}*/}
         </Box>
       )}
 

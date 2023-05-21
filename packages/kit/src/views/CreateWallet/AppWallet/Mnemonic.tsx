@@ -25,6 +25,9 @@ import type {
   CreateWalletRoutesParams,
 } from '../../../routes';
 import type { RouteProp } from '@react-navigation/native';
+import {copyToClipboard} from "@onekeyhq/components/src/utils/ClipboardUtils";
+import {formatMessage} from "@onekeyhq/components/src/Provider";
+import Icon from "@onekeyhq/components/src/Icon";
 
 type RouteProps = RouteProp<
   CreateWalletRoutesParams,
@@ -35,6 +38,12 @@ type MnemonicProps = {
   mnemonic: string;
   onPress?: () => void;
   onPromise?: () => Promise<void>;
+};
+
+const copyMnemonicToClipboard = (text?: string) => {
+  if (!text) return;
+  copyToClipboard(text);
+  ToastManager.show({ title: formatMessage({ id: 'msg__copied' }) });
 };
 
 export const Mnemonic: FC<MnemonicProps> = ({
@@ -73,15 +82,29 @@ export const Mnemonic: FC<MnemonicProps> = ({
                 {intl.formatMessage({ id: 'modal__for_your_eyes_only_desc' })}
               </Text>
             </Box>
-            <Text
-              typography={{ sm: 'Body1Strong', md: 'Body2Strong' }}
-              mb="4"
-              textAlign="center"
-            >
-              ↓ {intl.formatMessage({ id: 'content__click_below_to_copy' })} ↓
-            </Text>
             <Box flex={1} mb={8}>
               <MnemonicCard mnemonic={mnemonic} />
+              <Box
+                  alignItems="center"
+                  justifyContent="center"
+                  flexDirection="row"
+                  mt={3}
+              >
+                <Box mr={1}>
+                  <Icon name="CopyMini"/>
+                </Box>
+                <Text
+                    typography="Body2"
+                    color="text-highlight"
+                    textAlign="center"
+                    fontSize={'14px'}
+                    onPress={() => {
+                      copyMnemonicToClipboard(mnemonic);
+                    }}
+                >
+                  {intl.formatMessage({ id: 'action__copy' })}
+                </Text>
+              </Box>
             </Box>
           </Box>
         ),

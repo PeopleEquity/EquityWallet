@@ -27,14 +27,17 @@ const ShowRecoveryPhrase = () => {
   const route = useRoute<RouteProps>();
   const { mnemonic } = route.params;
   const onPressSavedPhrase = useCallback(() => {
-    navigation.replace(EOnboardingRoutes.BehindTheScene, route.params);
+    navigation.replace(EOnboardingRoutes.BehindTheScene, {
+      ...route.params,
+      type: 'phrase'
+    });
   }, [navigation, route.params]);
 
   return (
     <Layout
-      title={intl.formatMessage({ id: 'content__click_below_to_copy' })}
+      title={intl.formatMessage({ id: 'content__view_your_recovery_phrase' })}
       description={intl.formatMessage({
-        id: 'modal__for_your_eyes_only_desc',
+        id: 'content__view_your_recovery_phrase_desc',
       })}
       fullHeight
       secondaryContent={

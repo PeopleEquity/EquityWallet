@@ -6,19 +6,28 @@ import { useIntl } from 'react-intl';
 import {
   Box,
   Button,
-  MnemonicCard,
-  Text,
+  MnemonicCard, Pressable,
+  Text, ToastManager,
   useIsVerticalLayout,
 } from '@onekeyhq/components';
 
 import { wait } from '../../../../utils/helper';
 
 import type { IBoxProps } from 'native-base';
+import {copyToClipboard} from "@onekeyhq/components/src/utils/ClipboardUtils";
+import {formatMessage} from "@onekeyhq/components/src/Provider";
+import Icon from "@onekeyhq/components/src/Icon";
 
 type PhraseSheetProps = {
   onPressSavedPhrase?: () => void;
   mnemonic: string;
 } & IBoxProps;
+
+const copyMnemonicToClipboard = (text?: string) => {
+  if (!text) return;
+  copyToClipboard(text);
+  ToastManager.show({ title: formatMessage({ id: 'msg__copied' }) });
+};
 
 const PhraseSheet: FC<PhraseSheetProps> = ({
   onPressSavedPhrase,
@@ -35,15 +44,33 @@ const PhraseSheet: FC<PhraseSheetProps> = ({
 
   return (
     <Box alignSelf="stretch" flex={1} {...rest}>
-      <Text typography="Body2" color="text-subdued" textAlign="center" mb={4}>
-        ↓ {intl.formatMessage({ id: 'content__click_below_to_copy' })} ↓
+      <Text typography="Body2" color="text-default" textAlign="left" mb={4}>
+        {intl.formatMessage({ id: 'content__save_phrase_securely' })}
       </Text>
       <Box flex={1} mb={8}>
         <MnemonicCard mnemonic={mnemonic} />
+        <Box
+            alignItems="center"
+            justifyContent="center"
+            flexDirection="row"
+            mt={3}
+        >
+          <Box mr={1}>
+            <Icon name="CopyMini"/>
+          </Box>
+          <Text
+              typography="Body2"
+              color="text-highlight"
+              textAlign="center"
+              fontSize={'14px'}
+              onPress={() => {
+                copyMnemonicToClipboard(mnemonic);
+              }}
+          >
+            {intl.formatMessage({ id: 'action__copy' })}
+          </Text>
+        </Box>
       </Box>
-      <Text typography="Body2" color="text-subdued" textAlign="center" mb={4}>
-        {intl.formatMessage({ id: 'content__save_phrase_securely' })}
-      </Text>
       <Button
         type="primary"
         size={isVerticalLayout ? 'xl' : 'base'}

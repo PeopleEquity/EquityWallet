@@ -10,7 +10,7 @@ import {
   useIsVerticalLayout,
   useUserDevice,
 } from '@onekeyhq/components';
-import { Tabs } from '@onekeyhq/components/src/CollapsibleTabView';
+import { Tabs } from '@onekeyhq/components/src/CollapsibleTabView2';
 import {
   getStatus,
   useActiveWalletAccount,
@@ -150,10 +150,28 @@ const WalletTabs: FC = () => {
           </>
         </Tabs.Tab>
         <Tabs.Tab
-          name={WalletHomeTabEnum.Collectibles}
-          label={intl.formatMessage({ id: 'asset__collectibles' })}
+            name={WalletHomeTabEnum.Collectibles}
+            label={intl.formatMessage({ id: 'asset__collectibles' })}
         >
           <NFTList />
+        </Tabs.Tab>
+        <Tabs.Tab
+            name={WalletHomeTabEnum.DcFi}
+            label={'DCFi'}
+        >
+          <NFTList />
+        </Tabs.Tab>
+        <Tabs.Tab
+            name={WalletHomeTabEnum.Dcs}
+            label={'DCS'}
+        >
+          <NFTList />
+        </Tabs.Tab>
+        <Tabs.Tab
+            name={WalletHomeTabEnum.Tools}
+            label={intl.formatMessage({ id: 'form__tools' })}
+        >
+          <ToolsPage />
         </Tabs.Tab>
         <Tabs.Tab
           name={WalletHomeTabEnum.History}
@@ -164,13 +182,6 @@ const WalletTabs: FC = () => {
             networkId={network?.id}
             isHomeTab
           />
-          {/* )} */}
-        </Tabs.Tab>
-        <Tabs.Tab
-          name={WalletHomeTabEnum.Tools}
-          label={intl.formatMessage({ id: 'form__tools' })}
-        >
-          <ToolsPage />
         </Tabs.Tab>
       </Tabs.Container>
       {backupToast()}

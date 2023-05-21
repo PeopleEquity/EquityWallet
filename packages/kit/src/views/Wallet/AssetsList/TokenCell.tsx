@@ -124,7 +124,7 @@ const TokenCell: FC<TokenCellProps> = ({
 
   return (
     <Pressable.Item
-      p={4}
+      p={5}
       bg={bg}
       shadow={undefined}
       borderTopRadius={borderTopRadius}

@@ -1,6 +1,8 @@
 export enum WalletHomeTabEnum {
   Tokens = 'Tokens',
   Collectibles = 'Collectibles',
+  DcFi = 'DCFI',
+  Dcs = 'DCS',
   History = 'History',
   Tools = 'Tools',
 }

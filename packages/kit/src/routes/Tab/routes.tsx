@@ -67,8 +67,9 @@ export const tabRoutes: TabRouteConfig[] = [
     component: toFocusedLazy(DCS, {
       rootTabName: TabRoutes.DCS,
     }),
-    tabBarIcon: (focused) => (focused ? 'CompassSolid' : 'CompassOutline'),
-    translationId: 'title__explore',
+    /* tabBarIcon: (focused) => (focused ? 'CompassSolid' : 'CompassOutline'), */
+    tabBarIcon: (focused) => (focused ? 'Dcs' : 'Dcs'),
+    translationId: 'title__dcs',
     children: [
       {
         name: HomeRoutes.DCSWealth,
@@ -89,9 +90,11 @@ export const tabRoutes: TabRouteConfig[] = [
     component: toFocusedLazy(HomeScreen, {
       rootTabName: TabRoutes.Home,
     }),
+    /* tabBarIcon: (focused) =>
+        focused ? 'CreditCardSolid' : 'CreditCardOutline', */
     tabBarIcon: (focused) =>
-      focused ? 'CreditCardSolid' : 'CreditCardOutline',
-    translationId: 'form__account',
+      focused ? 'Wallet' : 'Wallet',
+    translationId: 'title__wallets',
     children: [
       {
         name: HomeRoutes.ScreenTokenDetail,
@@ -150,8 +153,9 @@ export const tabRoutes: TabRouteConfig[] = [
   {
     name: TabRoutes.Swap,
     component: SwapScreen,
-    tabBarIcon: () => 'ArrowsRightLeftOutline',
-    translationId: 'title__Swap_Bridge',
+    /* tabBarIcon: () => 'ArrowsRightLeftOutline', */
+    tabBarIcon: () => 'Swap',
+    translationId: 'title__swap',
     children: [
       {
         name: HomeRoutes.SwapHistory,
@@ -192,7 +196,8 @@ export const tabRoutes: TabRouteConfig[] = [
     component: toFocusedLazy(DiscoverScreen, {
       rootTabName: TabRoutes.Discover,
     }),
-    tabBarIcon: (focused) => (focused ? 'CompassSolid' : 'CompassOutline'),
+    /* tabBarIcon: (focused) => (focused ? 'CompassSolid' : 'CompassOutline'), */
+    tabBarIcon: (focused) => (focused ? 'Explore' : 'Explore'),
     translationId: 'title__explore',
     children: [
       {
@@ -214,8 +219,9 @@ export const tabRoutes: TabRouteConfig[] = [
     component: toFocusedLazy(MeScreen, {
       rootTabName: TabRoutes.Me,
     }),
-    tabBarIcon: (focused) => (focused ? 'Bars4Solid' : 'Bars4Outline'),
-    translationId: 'title__menu',
+    /* tabBarIcon: (focused) => (focused ? 'Bars4Solid' : 'Bars4Outline'), */
+    tabBarIcon: (focused) => (focused ? 'Me' : 'Me'),
+    translationId: 'title__me',
     children: [
       {
         name: HomeRoutes.ScreenOnekeyLiteDetail,
@@ -275,7 +281,8 @@ if (process.env.NODE_ENV !== 'production') {
     component: toFocusedLazy(DevelopScreen, {
       rootTabName: TabRoutes.Developer,
     }),
-    tabBarIcon: () => 'ChipOutline',
+    /* tabBarIcon: () => 'ChipOutline', */
+    tabBarIcon: () => 'Dev',
     translationId: 'form__dev_mode',
   });
 }

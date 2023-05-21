@@ -96,7 +96,7 @@ function AssetsList({
   const { size } = useUserDevice();
   const responsivePadding = () => {
     if (['NORMAL', 'LARGE'].includes(size)) return 32;
-    return 16;
+    return 0;
   };
 
   useFocusEffect(
@@ -200,7 +200,7 @@ function AssetsList({
       contentContainerStyle={[
         {
           paddingHorizontal: flatStyle ? 0 : responsivePadding(),
-          marginTop: 24,
+          marginTop: isVerticalLayout ? 0 : 24,
         },
         contentContainerStyle,
       ]}

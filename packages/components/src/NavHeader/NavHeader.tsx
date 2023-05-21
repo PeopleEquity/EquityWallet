@@ -16,6 +16,7 @@ import HeaderTitle from './HeaderTitle';
 import type { HeaderTitleProps } from './HeaderTitle';
 import type { NativeStackHeaderProps } from '@react-navigation/native-stack';
 import type { StyleProp, ViewStyle } from 'react-native';
+import {useNavigationState} from "@react-navigation/core";
 
 interface HeaderProps extends HeaderTitleProps {
   headerTitle?: () => ReactNode;
@@ -44,7 +45,8 @@ const NavHeader: FC<HeaderProps & Partial<NativeStackHeaderProps>> = ({
 }) => {
   const insets = useSafeAreaInsets();
   const isVertical = useIsVerticalLayout();
-  const bgColor = useThemeValue('surface-subdued');
+  const navIndex = useNavigationState((state) => state?.index);
+  const bgColor = useThemeValue(navIndex === 1 ? 'surface-subdued' : 'background-default');
 
   const height = isVertical ? defaultMobileHeight : defaultDesktopHeight;
   const hasLeft = Boolean(back || alwaysShowBackButton || headerLeft);

@@ -47,7 +47,7 @@ import TokenCell from "../AssetsList/TokenCell";
 type NavigationProps = ModalScreenProps<ReceiveTokenRoutesParams> &
   ModalScreenProps<SendRoutesParams>;
 
-export const FIXED_VERTICAL_HEADER_HEIGHT = 238;
+export const FIXED_VERTICAL_HEADER_HEIGHT = 182;
 export const FIXED_HORIZONTAL_HEDER_HEIGHT = 152;
 
 const AccountAmountInfo: FC = () => {
@@ -208,8 +208,11 @@ const AccountOption: FC<AccountOptionProps> = ({ isSmallView }) => {
     <Box flexDirection="row" px={isVertical ? 1 : 0} mx={-3}>
       <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
         <IconButton
-            circle
-            size={isSmallView ? 'xl' : 'lg'}
+            borderRadius={'12px'}
+            height={'36px'}
+            width={'36px'}
+            background={'background-default'}
+            borderColor={'background-default'}
             name="QrCodeOutline"
             type="basic"
             isDisabled={wallet?.type === 'watching' || !account}
@@ -237,8 +240,11 @@ const AccountOption: FC<AccountOptionProps> = ({ isSmallView }) => {
       </Box>
       <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
         <IconButton
-          circle
-          size={isSmallView ? 'xl' : 'lg'}
+            borderRadius={'12px'}
+            height={'36px'}
+            width={'36px'}
+            background={'background-default'}
+            borderColor={'background-default'}
           name="PaperAirplaneOutline"
           type="basic"
           isDisabled={wallet?.type === 'watching' || !account}
@@ -261,8 +267,11 @@ const AccountOption: FC<AccountOptionProps> = ({ isSmallView }) => {
       </Box>
       <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
         <IconButton
-          circle
-          size={isSmallView ? 'xl' : 'lg'}
+            borderRadius={'12px'}
+            height={'36px'}
+            width={'36px'}
+            background={'background-default'}
+            borderColor={'background-default'}
           name="ArrowsRightLeftOutline"
           type="basic"
           isDisabled={wallet?.type === 'watching' || !account}
@@ -283,8 +292,11 @@ const AccountOption: FC<AccountOptionProps> = ({ isSmallView }) => {
       <Box flex={iconBoxFlex} mx={3} minW="56px" alignItems="center">
         <AccountMoreMenu offset={platformEnv.isNativeAndroid ? 55 : 30}>
           <IconButton
-            circle
-            size={isSmallView ? 'xl' : 'lg'}
+              borderRadius={'12px'}
+              height={'36px'}
+              width={'36px'}
+              background={'background-default'}
+              borderColor={'background-default'}
             name="EllipsisVerticalOutline"
             type="basic"
           />
@@ -315,7 +327,7 @@ const AccountInfo = () => {
         h={FIXED_VERTICAL_HEADER_HEIGHT}
       >
         <AccountAmountInfo />
-        <Box mt={8}>
+        <Box>
           <AccountOption isSmallView={isSmallView} />
         </Box>
       </Box>

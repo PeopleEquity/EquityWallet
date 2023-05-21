@@ -79,7 +79,7 @@ const SecondaryContent: FC<SecondaryContentProps> = ({
             }
           >
             {intl.formatMessage({
-              id: 'action__show_recovery_phrase',
+              id: 'action__show_set_serect_password',
             })}
           </Button>
         </>
