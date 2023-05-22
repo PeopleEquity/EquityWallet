@@ -26,5 +26,6 @@ const SvgBrandLogo = (props: SvgProps) => (
 	</G>
 </G>
 </Svg>
+
 );
 export default SvgBrandLogo;

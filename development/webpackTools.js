@@ -193,7 +193,6 @@ function normalizeConfig({
   // - Ext do not need devtool sourcemap, use SourceMapDevToolPlugin instead.
   // - building slow
   // config.devtool = 'cheap-module-source-map';
-  
 
   console.log("====================================");
   // console.log(config);
@@ -233,7 +232,6 @@ function normalizeConfig({
       },
     };
   }
-
 
   return config;
 }

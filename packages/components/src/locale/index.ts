@@ -1,6 +1,6 @@
 import ISO6391 from 'iso-639-1';
 
-import platformEnv from '@onekeyhq/shared/src/platformEnv';
+import platformEnv from '@OneKeyhq/shared/src/platformEnv';
 
 import { LOCALES as _LOCALES, enUS } from './localeJsonMap';
 
