@@ -1,4 +1,6 @@
-const networkList = require('@onekeyfe/network-list/build/onekey.networklist.json');
+//@ESChain: 需要增加本地测试网
+// const networkList = require('@onekeyfe/network-list/build/onekey.networklist.json');
+const networkList = require('./networklist.json');
 const prettier = require('prettier');
 const fs = require('fs');
 

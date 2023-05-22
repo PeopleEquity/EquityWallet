@@ -19,7 +19,7 @@ export function useHtmlPreloadSplashLogoRemove(options?: {
 }) {
   useEffect(() => {
     if (platformEnv.isRuntimeBrowser) {
-      const img = document.querySelector('.onekey-index-html-preload-image');
+      const img = document.querySelector('.equity-swap-index-html-preload-image');
       if (options?.isDelay) {
         // splash logo is disabled in extension, so we need more delay to wait home ui ready
         const hideLogoDelay = platformEnv.isExtension ? 400 : 50;
@@ -59,7 +59,6 @@ const AnimatedSplashView = memo(
         ? require('../../assets/splash.svg') // SVG in web env
         : require('../../assets/splash.png');
     }, [initDataReady]);
-
     const content = useMemo(
       () => (
         <AnimatedSplash

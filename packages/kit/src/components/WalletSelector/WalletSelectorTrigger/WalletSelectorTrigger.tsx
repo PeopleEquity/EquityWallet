@@ -94,7 +94,6 @@ const WalletSelectorTrigger: FC<
       position="relative"
       alignItems="flex-start"
       justifyContent="center"
-      w="full"
     >
       {renderTrigger?.({ visible, handleToggleVisible }) ?? (
         <WalletSelectorTriggerElement

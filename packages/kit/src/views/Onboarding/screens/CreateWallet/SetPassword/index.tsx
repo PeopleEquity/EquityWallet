@@ -32,8 +32,10 @@ function RedirectToRecoveryPhrase({
   password,
   withEnableAuthentication,
   importedMnemonic,
+  type
 }: {
   password: string;
+  type: 'secret' | 'phrase'
   withEnableAuthentication?: boolean;
   importedMnemonic?: string;
 }) {
@@ -41,20 +43,29 @@ function RedirectToRecoveryPhrase({
 
   useEffect(() => {
     (async function () {
-      if (importedMnemonic) {
-        navigation.replace(EOnboardingRoutes.BehindTheScene, {
-          password,
-          mnemonic: importedMnemonic,
-          withEnableAuthentication,
-        });
-      } else {
-        const mnemonic = await backgroundApiProxy.engine.generateMnemonic();
+      if (type === 'phrase') {
+        if (importedMnemonic) {
+          navigation.replace(EOnboardingRoutes.BehindTheScene, {
+            password,
+            mnemonic: importedMnemonic,
+            withEnableAuthentication,
+          });
+        } else {
+          const mnemonic = await backgroundApiProxy.engine.generateMnemonic();
 
+          // return;
+          await wait(600);
+          navigation.replace(EOnboardingRoutes.RecoveryPhrase, {
+            password,
+            mnemonic,
+            withEnableAuthentication,
+          });
+        }
+      } else {
         // return;
         await wait(600);
-        navigation.replace(EOnboardingRoutes.RecoveryPhrase, {
+        navigation.replace(EOnboardingRoutes.RecoverySerect, {
           password,
-          mnemonic,
           withEnableAuthentication,
         });
       }
@@ -77,6 +88,7 @@ const SetPassword = () => {
   const route = useRoute<RouteProps>();
   const mnemonic = route.params?.mnemonic;
   const disableAnimation = route?.params?.disableAnimation;
+  const type = route?.params?.type;
 
   const title = useMemo(
     () =>
@@ -120,6 +132,7 @@ const SetPassword = () => {
             password={password}
             withEnableAuthentication={withEnableAuthentication}
             importedMnemonic={mnemonic}
+            type={type}
           />
         )}
       </Protected>

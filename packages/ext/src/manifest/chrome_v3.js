@@ -5,7 +5,7 @@ module.exports = {
   // browser_action
   'action': {
     'default_icon': 'icon-128.png',
-    'default_title': 'OneKey',
+    'default_title': 'EquityWallet',
     // open popup.html instantly, but display white screen when redirecting
     // 'default_popup': 'ui-popup-boot.html',
     'default_popup': 'ui-popup.html',

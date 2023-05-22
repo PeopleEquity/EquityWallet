@@ -5423,7 +5423,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.6.0
     eth-rpc-errors: ^4.0.3
     expo: ^45.0.5
-    expo-device: ^4.3.0
+    expo-device: ^5.2.1
     expo-yarn-workspaces: ^2.0.3
     file-loader: ^6.2.0
     fs-extra: ^10.0.0
@@ -12629,9 +12629,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.0, caniuse-lite@npm:^1.0.30001202, caniuse-lite@npm:^1.0.30001228, caniuse-lite@npm:^1.0.30001370":
-  version: 1.0.30001418
-  resolution: "caniuse-lite@npm:1.0.30001418"
-  checksum: 03380a9ba50b1abd0081e76bfdf331bfb2c28f2277ce5eead5b83960c4db9f1fbbd84a536efa6f8f1fe2c038bc01129d6c42d17f8323fe99a016a5da3829c4bc
+  version: 1.0.30001477
+  resolution: "caniuse-lite@npm:1.0.30001477"
+  checksum: 22db0feccf43b0c16a46bb59b4e26ae05011f41c6947f1dd176d5056e0db58c3415a5ff7ee5a60903a6bda7311b71705d1d29fc4c43a8b8a1bdeef8c1d93f6a8
   languageName: node
   linkType: hard
 
@@ -17122,6 +17122,17 @@ __metadata:
   peerDependencies:
     expo: "*"
   checksum: a92536c4177d39f7d4c0e5755fcbc6316ddd3ab39a415f9f711d9ed798e682c61812d6716cece88b022ea60306b011ea637448a65d47e2bacf9c52c5e71c7e5f
+  languageName: node
+  linkType: hard
+
+"expo-device@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "expo-device@npm:5.2.1"
+  dependencies:
+    ua-parser-js: ^0.7.33
+  peerDependencies:
+    expo: "*"
+  checksum: da94661b56f71e76f5f34593922aed085bb40b7a5f00e1550cb1b18336dad50f51513a2859797ef1704412b88798c952668410e86a8298a8ba5eeb8eabecadd6
   languageName: node
   linkType: hard
 
@@ -31853,6 +31864,13 @@ __metadata:
   version: 0.7.31
   resolution: "ua-parser-js@npm:0.7.31"
   checksum: e2f8324a83d1715601576af85b2b6c03890699aaa7272950fc77ea925c70c5e4f75060ae147dc92124e49f7f0e3d6dd2b0a91e7f40d267e92df8894be967ba8b
+  languageName: node
+  linkType: hard
+
+"ua-parser-js@npm:^0.7.33":
+  version: 0.7.35
+  resolution: "ua-parser-js@npm:0.7.35"
+  checksum: 0a332e8d72d277e62f29ecb3a33843b274de93eb9378350b746ea0f89ef05ee09c94f2c1fdab8001373ad5e95a48beb0a94f39dc1670c908db9fc9b8f0876204
   languageName: node
   linkType: hard
 

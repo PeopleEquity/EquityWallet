@@ -72,6 +72,10 @@ export enum HomeRoutes {
   FullTokenListScreen = 'FullTokenListScreen',
   ScreenTokenDetail = 'TokenDetailScreen',
   DebugScreen = 'Debug',
+  DCS = 'DCS',
+  DCSWealth = 'DCSWealth',
+  DCSTrending = 'DCSTrending',
+  DCSCurrencies = 'DCSCurrencies',
   ScreenOnekeyLiteDetail = 'OnekeyLiteDetailScreen',
   ExploreScreen = 'ExploreScreen',
   DAppListScreen = 'DAppListScreen',
@@ -100,6 +104,7 @@ export enum HomeRoutes {
 }
 export enum TabRoutes {
   // Overview = 'overview',
+  DCS = 'DCS',
   Home = 'home',
   Swap = 'swap',
   Market = 'market',

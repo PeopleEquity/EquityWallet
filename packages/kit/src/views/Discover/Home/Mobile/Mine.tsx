@@ -203,7 +203,7 @@ const ListHeaderComponent = () => {
   }
   return (
     <>
-      <DAppCategories />
+      {/*<DAppCategories />*/}
       {platformEnv.isWeb ? null : <ListHeaderItems />}
     </>
   );
@@ -222,7 +222,7 @@ export const Mine = () => {
   const [total, setTotal] = useState<number>(10);
   const { onItemSelect } = useContext(DiscoverContext);
 
-  const data = useMemo(() => {
+  /*const data = useMemo(() => {
     const items = dapps.map((item) => ({
       title: item.label,
       data: item.items,
@@ -230,7 +230,41 @@ export const Mine = () => {
       _title: item._label,
     }));
     return total < items.length ? items.slice(0, total) : items;
-  }, [dapps, total]);
+  }, [dapps, total]);*/
+
+  const data = useMemo(() => {
+    return [
+    {
+        "title": "Trendy 🔥",
+        "data": [
+            {
+                "_id": "634fa05ab09822e6cc87304f",
+                "name": "Equity Swap",
+                "url": "https://www.equityswap.club/",
+                "logoURL": "https://p.ipic.vip/5fshzt.png",
+                "status": "Listed",
+                "subtitle": "EquitySwap offers three pricing models suitable for companies of varying sizes, boosting liquidity and preventing market-cap inflation.",
+                "description": "",
+                "networkIds": [
+                    "evm--97"
+                ],
+                "tagIds": [
+                    "634fa053b09822e6cc873011",
+                    "634fa07920ec3e25ecd1ff30"
+                ],
+                "categoryIds": [
+                    "634fa057b09822e6cc873038",
+                    "63522a884a8ed11c5aafe849"
+                ],
+                "createdAt": "2022-10-19T06:59:38.264Z",
+                "updatedAt": "2023-02-06T09:45:33.364Z",
+            }
+        ],
+        "tagId": "634fa07920ec3e25ecd1ff30",
+        "_title": "276585007"
+    }
+    ]
+  }, [])
 
   useEffect(() => {
     if (platformEnv.isNative) {

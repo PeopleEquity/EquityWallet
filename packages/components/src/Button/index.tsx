@@ -36,6 +36,7 @@ export type ButtonSize = 'base' | 'xs' | 'sm' | 'lg' | 'xl';
 export type ButtonType =
   | 'primary'
   | 'basic'
+  | 'basic2'
   | 'plain'
   | 'destructive'
   | 'outline';
@@ -222,6 +223,65 @@ const BasicButton = forwardRef<typeof NativeBaseButton, ButtonPropsWithoutType>(
   },
 );
 BasicButton.displayName = 'BasicButton';
+
+const Basic2Button = forwardRef<typeof NativeBaseButton, ButtonPropsWithoutType>(
+    (
+        {
+          size,
+          isDisabled,
+          isLoading,
+          leftIconName,
+          rightIconName,
+          iconSize,
+          textProps,
+          children,
+          ...props
+        },
+        ref,
+    ) => {
+      const nbTextProps = useNbTextProps('text-default', size, textProps);
+      const { iconColor } = props;
+      const { leftIcon, rightIcon } = useIcons({
+        iconSize,
+        iconColor,
+        leftIconName,
+        rightIconName,
+        isDisabled,
+      });
+      const inlineObjStyles = useMemo(
+          () => ({
+            _hover: { bg: 'surface-hovered' },
+            _pressed: { bg: 'surface-pressed' },
+            _focus: { bg: undefined },
+            _disabled: {
+              color: 'text-disabled',
+              cursor: 'not-allowed',
+              opacity: 1,
+            },
+          }),
+          [],
+      );
+      return (
+          <NativeBaseButton
+              ref={ref}
+              isDisabled={isDisabled}
+              isLoading={isLoading}
+              leftIcon={leftIcon}
+              rightIcon={rightIcon}
+              borderRadius="12"
+              borderWidth={StyleSheet.hairlineWidth}
+              borderColor="border-default"
+              variant="ghost"
+              _text={nbTextProps}
+              {...inlineObjStyles}
+              {...props}
+          >
+            {children}
+          </NativeBaseButton>
+      );
+    },
+);
+Basic2Button.displayName = 'Basic2Button';
 
 const PrimaryButton = forwardRef<
   typeof NativeBaseButton,
@@ -508,6 +568,7 @@ const components: Record<
   >
 > = {
   'basic': BasicButton,
+  'basic2': Basic2Button,
   'destructive': DestructiveButton,
   'outline': OutlineButton,
   'plain': PlainButton,

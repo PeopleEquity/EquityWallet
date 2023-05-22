@@ -367,7 +367,7 @@ const Token: FC<TokenProps> = ({
         showNetworkIcon={showNetworkIcon}
       />
       {showInfo && (
-        <Box display="flex" ml="3" {...infoBoxProps}>
+        <Box display="flex" ml="4" {...infoBoxProps}>
           {nameView}
           {descView}
           {extraView}

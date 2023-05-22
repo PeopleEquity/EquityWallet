@@ -23,7 +23,7 @@ if (platformEnv.isExtensionBackgroundServiceWorker) {
 serviceWorker.disableCacheInBackground();
 
 console.log(
-  `[OneKey RN] Extension background page ready: ${new Date().toLocaleTimeString()}`,
+  `[EquityWallet RN] Extension background page ready: ${new Date().toLocaleTimeString()}`,
 );
 
 const bridge = bridgeSetup.background.createHostBridge({

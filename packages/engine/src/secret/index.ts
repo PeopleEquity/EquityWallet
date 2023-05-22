@@ -1,5 +1,5 @@
 import { BaseBip32KeyDeriver, ED25519Bip32KeyDeriver } from './bip32';
-import { mnemonicToRevealableSeed, revealEntropy } from './bip39';
+import { mnemonicToRevealableSeed, serectToRevealableSeed, revealEntropy } from './bip39';
 import { ed25519, nistp256, secp256k1 } from './curves';
 import * as encryptor from './encryptors/aes256';
 import { hash160 } from './hash';
@@ -7,6 +7,7 @@ import { hash160 } from './hash';
 import type { Bip32KeyDeriver, ExtendedKey } from './bip32';
 import type { RevealableSeed } from './bip39';
 import type { BaseCurve } from './curves';
+import * as bip39 from "bip39";
 
 export type CurveName = 'secp256k1' | 'nistp256' | 'ed25519';
 
@@ -301,6 +302,24 @@ function revealableSeedFromMnemonic(
   };
 }
 
+function revealableSeedFromSerect(
+    mnemonic: string,
+    password: string,
+): RevealableSeed {
+  const rs: RevealableSeed = {
+    entropyWithLangPrefixed: Buffer.from(mnemonic),
+    seed: bip39.mnemonicToSeedSync(mnemonic, '')
+  }
+  console.log('rs', rs)
+  return {
+    entropyWithLangPrefixed: encryptor.encrypt(
+        password,
+        rs.entropyWithLangPrefixed,
+    ),
+    seed: encryptor.encrypt(password, rs.seed),
+  };
+}
+
 function mnemonicFromEntropy(
   encryptedEntropy: Buffer,
   password: string,
@@ -336,6 +355,7 @@ export {
   CKDPriv,
   CKDPub,
   revealableSeedFromMnemonic,
+  revealableSeedFromSerect,
   mnemonicFromEntropy,
   generateRootFingerprint,
 };

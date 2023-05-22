@@ -194,6 +194,7 @@ const icons = {
   Cog8ToothMini: () => import("./react/mini/Cog8Tooth"),
   CollectionMini: () => import("./react/mini/Collection"),
   ColorSwatchMini: () => import("./react/mini/ColorSwatch"),
+  CopyMini: () => import("./react/mini/Copy"),
   CommandLineMini: () => import("./react/mini/CommandLine"),
   ComputerDesktopMini: () => import("./react/mini/ComputerDesktop"),
   CpuChipMini: () => import("./react/mini/CpuChip"),
@@ -1199,6 +1200,19 @@ const icons = {
   WrenchScrewdriverSolid: () => import("./react/solid/WrenchScrewdriver"),
   XCircleSolid: () => import("./react/solid/XCircle"),
   XMarkSolid: () => import("./react/solid/XMark"),
+
+  Dcs: () => import("./react/tab/Dcs"),
+  DcsActive: () => import("./react/tab/DcsActive"),
+  Wallet: () => import("./react/tab/Wallet"),
+  WalletActive: () => import("./react/tab/WalletActive"),
+  Swap: () => import("./react/tab/Swap"),
+  SwapActive: () => import("./react/tab/SwapActive"),
+  Explore: () => import("./react/tab/Explore"),
+  ExploreActive: () => import("./react/tab/ExploreActive"),
+  Me: () => import("./react/tab/Me"),
+  MeActive: () => import("./react/tab/MeActive"),
+  Dev: () => import("./react/tab/Dev"),
+  DevActive: () => import("./react/tab/DevActive"),
 };
 export type ICON_NAMES = keyof typeof icons;
 export default icons;

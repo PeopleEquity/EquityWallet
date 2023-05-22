@@ -27,7 +27,10 @@ const ShowRecoveryPhrase = () => {
   const route = useRoute<RouteProps>();
   const { mnemonic } = route.params;
   const onPressSavedPhrase = useCallback(() => {
-    navigation.replace(EOnboardingRoutes.BehindTheScene, route.params);
+    navigation.replace(EOnboardingRoutes.BehindTheScene, {
+      ...route.params,
+      type: 'phrase'
+    });
   }, [navigation, route.params]);
 
   return (

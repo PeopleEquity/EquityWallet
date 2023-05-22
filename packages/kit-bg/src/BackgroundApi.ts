@@ -203,6 +203,16 @@ class BackgroundApi extends BackgroundApiBase implements IBackgroundApi {
     return value;
   }
 
+  get serviceDCS() {
+    const ServiceDCS =
+        require('./services/ServiceDCS') as typeof import('./services/ServiceDCS');
+    const value = new ServiceDCS.default({
+      backgroundApi: this,
+    });
+    Object.defineProperty(this, 'serviceDCS', { value });
+    return value;
+  }
+
   get serviceNFT() {
     const ServiceNFT =
       require('./services/ServiceNFT') as typeof import('./services/ServiceNFT');

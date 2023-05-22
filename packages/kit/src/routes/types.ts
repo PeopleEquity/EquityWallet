@@ -83,6 +83,7 @@ export type ModalRoutesParams = {
 /** Tab */
 
 export type TabRoutesParams = {
+  [TabRoutes.DCS]: undefined;
   [TabRoutes.Home]: undefined;
   [TabRoutes.Swap]:
     | undefined
@@ -125,6 +126,9 @@ export type HomeRoutesParams = {
     tagId: string;
     onItemSelect?: (item: DAppItemType) => void;
   };
+  [HomeRoutes.DCSWealth]: { network: Network; selectedIndex?: number };
+  [HomeRoutes.DCSTrending]: { network: Network; selectedIndex?: number };
+  [HomeRoutes.DCSCurrencies]: { network: Network };
   [HomeRoutes.MyDAppListScreen]: {
     defaultIndex?: number;
     onItemSelect?: (item: MatchDAppItemType) => void;

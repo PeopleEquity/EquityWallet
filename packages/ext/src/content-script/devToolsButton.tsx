@@ -29,7 +29,7 @@ function injectDevToolsButton() {
 
   const devToolsButton = document.createElement('button');
   devToolsButton.title =
-    'Reload OneKey extension and this site, make injected.js updated.';
+    'Reload EquityWallet extension and this site, make injected.js updated.';
   devToolsButton.draggable = true;
   devToolsButton.innerHTML = BTN_TEXT;
   devToolsButton.id = BTN_ID;
@@ -68,7 +68,7 @@ function injectDevToolsButton() {
     try {
       console.log('chrome.runtime', chrome.runtime);
       console.log('========================================');
-      console.log('>>>>>>>> OneKey Extension reloading in 3s...');
+      console.log('>>>>>>>> EquityWallet Extension reloading in 3s...');
       console.log(`>>>>>>>> ${IFRAME_URL}`);
       console.log('========================================');
 

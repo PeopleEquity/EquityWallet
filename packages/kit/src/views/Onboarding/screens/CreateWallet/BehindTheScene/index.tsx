@@ -74,6 +74,7 @@ function BehindTheSceneCreatingWallet({
     withEnableAuthentication,
     isHardwareCreating,
     entry,
+    type,
   } = routeParams;
 
   const context = useOnboardingContext();
@@ -176,12 +177,21 @@ function BehindTheSceneCreatingWallet({
         name: ETimelinePerfNames.createHDWallet,
         title: 'onboarding.createHDWallet >> start ===========================',
       });
-      await backgroundApiProxy.serviceAccount.createHDWallet({
-        password,
-        mnemonic,
-        dispatchActionDelay: 300, // should dispatchAction before postCreated
-        postCreatedDelay: 600,
-      });
+      if (type === 'serect') {
+        await backgroundApiProxy.serviceAccount.createSerectHDWallet({
+          password,
+          mnemonic,
+          dispatchActionDelay: 300, // should dispatchAction before postCreated
+          postCreatedDelay: 600,
+        });
+      } else {
+        await backgroundApiProxy.serviceAccount.createHDWallet({
+          password,
+          mnemonic,
+          dispatchActionDelay: 300, // should dispatchAction before postCreated
+          postCreatedDelay: 600,
+        });
+      }
 
       timelinePerfTrace.mark({
         name: ETimelinePerfNames.createHDWallet,
@@ -216,7 +226,7 @@ function BehindTheSceneCreatingWallet({
       );
     }
     return false;
-  }, [intl, mnemonic, password, withEnableAuthentication]);
+  }, [intl, mnemonic, password, withEnableAuthentication, type]);
 
   useEffect(() => {
     (async function () {

@@ -52,23 +52,29 @@ const RecoveryPhrase = () => {
     navigation.replace(EOnboardingRoutes.ShowRecoveryPhrase, route.params);
   }, [navigation, route.params]);
   const onPressSavedPhrase = useCallback(() => {
-    navigation.replace(EOnboardingRoutes.BehindTheScene, route.params);
+    navigation.replace(EOnboardingRoutes.BehindTheScene, {
+      ...route.params,
+      type: 'phrase',
+    });
   }, [navigation, route.params]);
 
   const lists = useMemo(
     () =>
       [
         {
+          before: '⭕',
           type: 'decorative',
           icon: 'LockClosedOutline',
           para: intl.formatMessage({ id: 'modal__attention_unlock' }),
         },
         {
+          before: '🔔',
           type: 'decorative',
           icon: 'DotsCircleHorizontalOutline',
           para: intl.formatMessage({ id: 'content__recovery_phrase_restore' }),
         },
         {
+          before: '🔴',
           type: 'warning',
           icon: 'ShieldCheckOutline',
           para: intl.formatMessage({
@@ -76,6 +82,7 @@ const RecoveryPhrase = () => {
           }),
         },
         {
+          before: '🚫️',
           type: 'critical',
           icon: 'EyeSlashOutline',
           para: intl.formatMessage({ id: 'modal__attention_shh' }),
@@ -101,17 +108,17 @@ const RecoveryPhrase = () => {
         {lists.map((item, index) => (
           <Box key={index} flexDir="row" alignItems="center" py={3}>
             <Box
-              p={2.5}
-              mr={4}
+              mr={1.5}
               rounded="full"
-              bgColor={getListItemLeadingColor(item.type)?.bgColor}
+              /* bgColor={getListItemLeadingColor(item.type)?.bgColor} */
               alignSelf="flex-start"
             >
-              <Icon
+              {/* <Icon
                 name={item.icon}
                 color={getListItemLeadingColor(item.type)?.iconColor}
                 size={20}
-              />
+              /> */}
+              {item.before}
             </Box>
             <Text flex={1} typography="Body2">
               {item.para}

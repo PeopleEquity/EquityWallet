@@ -1,25 +1,18 @@
 import type { FC, ReactNode } from 'react';
 
-import { Box, Pressable, Text, ToastManager } from '@onekeyhq/components';
+import { Box, Pressable, Text } from '@onekeyhq/components';
 
-import { formatMessage } from '../Provider';
-import { copyToClipboard } from '../utils/ClipboardUtils';
-
-const copyMnemonicToClipboard = (text?: string) => {
-  if (!text) return;
-  copyToClipboard(text);
-  ToastManager.show({ title: formatMessage({ id: 'msg__copied' }) });
-};
 const MnemonicCard: FC<{
   mnemonic: string;
 }> = ({ mnemonic }) => {
   const words = mnemonic.split(' ').filter(Boolean);
-  const halfIndex = words.length / 2;
+  const halfIndex = words.length / 3;
   const leftCol: ReactNode[] = [];
+  const centerCol: ReactNode[] = [];
   const rightCol: ReactNode[] = [];
   words.forEach((word, i) => {
     const wordComp = (
-      <Box key={i} flexDirection="row" my={1.5}>
+      <Box key={i} flexDirection="row" my={2}>
         <Text
           typography={{
             sm: 'Body1Strong',
@@ -43,25 +36,24 @@ const MnemonicCard: FC<{
     );
     if (i < halfIndex) {
       leftCol.push(wordComp);
-    } else {
+    } else if (i >= 2 * halfIndex) {
       rightCol.push(wordComp);
+    } else {
+      centerCol.push(wordComp);
     }
   });
   return (
     <Pressable
       px={4}
       py={{ base: 2, md: 2.5 }}
-      bg="surface-default"
-      _hover={{ bg: 'surface-hovered' }}
-      _pressed={{ bg: 'surface-pressed' }}
-      shadow="depth.2"
+      bg="background-pressed"
+      borderColor="background-border"
       borderRadius="12"
+      borderWidth='1px'
       flexDirection="row"
-      onPress={() => {
-        copyMnemonicToClipboard(mnemonic);
-      }}
     >
       <Box flex={1}>{leftCol}</Box>
+      <Box flex={1}>{centerCol}</Box>
       <Box flex={1}>{rightCol}</Box>
     </Pressable>
   );

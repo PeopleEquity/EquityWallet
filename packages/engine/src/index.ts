@@ -12,6 +12,7 @@ import RNRestart from 'react-native-restart';
 import {
   mnemonicFromEntropy,
   revealableSeedFromMnemonic,
+  revealableSeedFromSerect,
 } from '@onekeyhq/engine/src/secret';
 import {
   decrypt,
@@ -518,6 +519,109 @@ class Engine {
           'engine.createHDWallet >> addHdOrHwAccounts of each network DONE',
       });
 
+      const result = this.dbApi.confirmWalletCreated(wallet.id);
+
+      timelinePerfTrace.mark({
+        name: ETimelinePerfNames.createHDWallet,
+        title: 'engine.createHDWallet >> dbApi.confirmWalletCreated DONE',
+      });
+
+      return result;
+    }
+
+    throw new OneKeyInternalError('Invalid mnemonic.');
+  }
+
+  @backgroundMethod()
+  async createSerectHDWallet({
+    password,
+    mnemonic,
+    name,
+    avatar,
+    autoAddAccountNetworkId,
+    isAutoAddAllNetworkAccounts,
+  }: {
+    password: string;
+    mnemonic?: string;
+    name?: string;
+    avatar?: Avatar;
+    autoAddAccountNetworkId?: string;
+    isAutoAddAllNetworkAccounts?: boolean;
+  }): Promise<Wallet> {
+    timelinePerfTrace.mark({
+      name: ETimelinePerfNames.createHDWallet,
+      title: 'engine.createHDWallet >> validation START',
+    });
+
+    // Create an HD wallet, generate seed if not provided.
+    if (typeof name !== 'undefined' && name.length > 0) {
+      await this.validator.validateWalletName(name);
+    }
+    await this.validator.validatePasswordStrength(password);
+    await this.validator.validateHDWalletNumber();
+
+    timelinePerfTrace.mark({
+      name: ETimelinePerfNames.createHDWallet,
+      title: 'engine.createHDWallet >> validation DONE',
+    });
+
+    let rs;
+    try {
+      rs = revealableSeedFromSerect(mnemonic ? mnemonic : '', password);
+    } catch {
+      throw new OneKeyInternalError('Invalid mnemonic.');
+    }
+
+    timelinePerfTrace.mark({
+      name: ETimelinePerfNames.createHDWallet,
+      title: 'engine.createHDWallet >> revealableSeedFromMnemonic DONE',
+    });
+    console.log('mnemonic', mnemonic, mnemonicFromEntropy(rs.entropyWithLangPrefixed, password))
+    if (
+        mnemonic === mnemonicFromEntropy(rs.entropyWithLangPrefixed, password)
+    ) {
+      const wallet = await this.dbApi.createHDWallet({
+        password,
+        rs,
+        backuped: typeof mnemonic !== 'undefined',
+        name,
+        avatar,
+      });
+
+      timelinePerfTrace.mark({
+        name: ETimelinePerfNames.createHDWallet,
+        title: 'engine.createHDWallet >> dbApi.createHDWallet DONE',
+      });
+      console.log('step','2')
+      let networks: Array<string> = [];
+      if (isAutoAddAllNetworkAccounts) {
+        const supportedImpls = getSupportedImpls();
+        const addedImpl = new Set();
+        (await this.listNetworks()).forEach(({ id: networkId, impl }) => {
+          if (supportedImpls.has(impl) && !addedImpl.has(impl)) {
+            addedImpl.add(impl);
+            networks.push(networkId);
+          }
+        });
+      } else {
+        networks = [autoAddAccountNetworkId || OnekeyNetwork.eth];
+      }
+      console.log('step','3')
+      await Promise.all(
+          networks.map((networkId) =>
+              this.addHdOrHwAccounts({
+                password,
+                walletId: wallet.id,
+                networkId,
+              }).then(undefined, (e) => console.error(e)),
+          ),
+      );
+      timelinePerfTrace.mark({
+        name: ETimelinePerfNames.createHDWallet,
+        title:
+            'engine.createHDWallet >> addHdOrHwAccounts of each network DONE',
+      });
+      console.log('step','4')
       const result = this.dbApi.confirmWalletCreated(wallet.id);
 
       timelinePerfTrace.mark({

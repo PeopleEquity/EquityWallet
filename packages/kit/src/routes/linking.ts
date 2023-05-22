@@ -38,6 +38,10 @@ type WhiteListItemList = WhiteListItem[];
 
 const tabRoutesWhiteList: WhiteListItemList = [
   {
+    screen: `${TabRoutes.DCS}`,
+    path: `/${RootRoutes.Tab}/${TabRoutes.DCS}`,
+  },
+  {
     screen: `${TabRoutes.Home}`,
     path: `/${RootRoutes.Tab}/${TabRoutes.Home}`,
   },
