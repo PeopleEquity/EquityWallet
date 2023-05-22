@@ -35,10 +35,10 @@ function RedirectToRecoverySerect({
 }) {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps>();
-  console.log('route.params', route.params)
   useEffect(() => {
     (async function () {
       const serect = Buffer.from(bip39.mnemonicToSeedSync('', serectPassword)).toString('hex')
+
       // return;
       await wait(600);
       navigation.replace(EOnboardingRoutes.ShowRecoverySerect, {
@@ -62,7 +62,6 @@ const SetPassword = () => {
   const intl = useIntl();
   const { isPasswordSet } = useData();
   const route = useRoute<RouteProps>();
-  const mnemonic = route.params?.mnemonic;
   const disableAnimation = route?.params?.disableAnimation;
 
   const title = useMemo(

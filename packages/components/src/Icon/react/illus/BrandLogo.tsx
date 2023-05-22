@@ -8,9 +8,9 @@ const SvgBrandLogo = (props: SvgProps) => (
 		<Defs>
 			<Rect id="SVGID_1_" x="24.6" y="27.1" width="78.7" height="75"/>
 		</Defs>
-		<ClipPath id="SVGID_00000101826206355192482320000001128015041469319334_">
-			<Use xlinkHref="#SVGID_1_" />
-		</ClipPath>
+        <ClipPath id="SVGID_00000101826206355192482320000001128015041469319334_">
+          <Use xlinkHref="#SVGID_1_" />
+        </ClipPath>
 		<G clipPath="url(#SVGID_00000101826206355192482320000001128015041469319334_)">
 			<Path fill="#FFFFFF" d="M54.9,55.9c0.3-2,0.2-4-1.3-5.3c-0.8-0.7-2-0.9-3-0.7c-2,0.3-3.7,1.8-4.6,3.6c-0.9,1.8-1.3,3.8-1.4,5.9
 				c-0.2,3.1-0.6,6.2-0.5,9.4c0.1,3.1,0.5,6.2,1.8,8.9c1.3,2.8,3.5,5.2,6.3,6.3c3.5,1.3,7.5,0.3,10.7-1.6c3.2-2,5.7-4.9,8.1-7.7
@@ -27,4 +27,5 @@ const SvgBrandLogo = (props: SvgProps) => (
 </G>
 </Svg>
 );
+
 export default SvgBrandLogo;

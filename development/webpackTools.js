@@ -181,7 +181,7 @@ function normalizeConfig({
   config.resolve.alias = {
     ...config.resolve.alias,
     '@solana/buffer-layout-utils':
-      '@solana/buffer-layout-utils/lib/cjs/index.js',
+    '@solana/buffer-layout-utils/lib/cjs/index.js',
     '@solana/spl-token': '@solana/spl-token/lib/cjs/index.js',
     'aptos': 'aptos/dist/index.js',
     'framer-motion': 'framer-motion/dist/framer-motion',
@@ -193,37 +193,45 @@ function normalizeConfig({
   // - Ext do not need devtool sourcemap, use SourceMapDevToolPlugin instead.
   // - building slow
   // config.devtool = 'cheap-module-source-map';
-  config.optimization ??= {};
-  config.optimization.splitChunks ??= {};
-  config.optimization.splitChunks = {
-    chunks: 'all',
-    minSize: 100 * 1024,
-    maxSize: 4 * 1024 * 1024,
-    hidePathInfo: true,
-    automaticNameDelimiter: '.',
-    automaticNameMaxLength: 15,
-    name: false, // reduce module duplication across chunks
-    maxInitialRequests: 50000, // reduce module duplication across chunks
-    maxAsyncRequests: 50000, // reduce module duplication across chunks
-    ...config.optimization.splitChunks,
-    cacheGroups: {
-      // kit_assets: {
-      //   test: /\/kit\/assets/,
-      //   name: 'kit_assets',
-      //   chunks: 'all',
-      // },
-      // kit_routes: {
-      //   test: /\/kit\/src\/routes/,
-      //   name: 'kit_routes',
-      //   chunks: 'all',
-      // },
-      // lodash: {
-      //   test: /\/node_modules\/lodash/,
-      //   name: 'lodash',
-      //   chunks: 'all',
-      // },
-    },
-  };
+
+  console.log("====================================");
+  // console.log(config);
+
+  if (config.mode == "development") {
+    console.log("----");
+  } else {
+    config.optimization ?? {};
+    config.optimization.splitChunks ?? {};
+    config.optimization.splitChunks = {
+      chunks: 'all',
+      minSize: 100 * 1024,
+      maxSize: 4 * 1024 * 1024,
+      hidePathInfo: true,
+      automaticNameDelimiter: '.',
+      automaticNameMaxLength: 15,
+      name: false, // reduce module duplication across chunks
+      maxInitialRequests: 50000, // reduce module duplication across chunks
+      maxAsyncRequests: 50000, // reduce module duplication across chunks
+      ...config.optimization.splitChunks,
+      cacheGroups: {
+        // kit_assets: {
+        //   test: /\/kit\/assets/,
+        //   name: 'kit_assets',
+        //   chunks: 'all',
+        // },
+        // kit_routes: {
+        //   test: /\/kit\/src\/routes/,
+        //   name: 'kit_routes',
+        //   chunks: 'all',
+        // },
+        // lodash: {
+        //   test: /\/node_modules\/lodash/,
+        //   name: 'lodash',
+        //   chunks: 'all',
+        // },
+      },
+    };
+  }
 
   return config;
 }

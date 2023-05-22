@@ -182,6 +182,9 @@ android {
         if (isNewArchitectureEnabled()) {
             // We configure the NDK build only if you decide to opt-in for the New Architecture.
             externalNativeBuild {
+                cmake {
+                    version "3.18.1"
+                }
                 ndkBuild {
                     arguments "APP_PLATFORM=android-21",
                             "APP_STL=c++_shared",
@@ -219,6 +222,9 @@ android {
     if (isNewArchitectureEnabled()) {
         // We configure the NDK build only if you decide to opt-in for the New Architecture.
         externalNativeBuild {
+            cmake {
+                version "3.18.1"
+            }            
             ndkBuild {
                 path "$projectDir/src/main/jni/Android.mk"
             }
