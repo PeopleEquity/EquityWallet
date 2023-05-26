@@ -42,7 +42,7 @@ const SecondaryContent: FC<SecondaryContentProps> = ({
           onPress={onPressSavedPhrase}
       >
         {intl.formatMessage({
-          id: 'action__show_recovery_phrase',
+          id: 'action__show_set_serect_password',
         })}
       </Button>
     </Center>

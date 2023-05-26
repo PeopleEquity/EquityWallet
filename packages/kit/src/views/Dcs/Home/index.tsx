@@ -67,6 +67,7 @@ const Content = () => {
 const DCS = () => {
   const navigation = useNavigation();
   const { top } = useSafeAreaInsets();
+  const { bottom } = useSafeAreaInsets();
 
   useEffect(() => {
     navigation.setOptions({ headerShown: false });
@@ -75,6 +76,7 @@ const DCS = () => {
     <Box flex={1} mt={`${top}px`}>
       <PageHeader />
       <Content />
+      <Box h={`32px`} />
     </Box>
   );
 };
