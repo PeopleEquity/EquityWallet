@@ -127,16 +127,15 @@ function mnemonicToRevealableSeed(
 function revealEntropy(entropyWithLangPrefixed: Buffer): string {
   const langCode: number = entropyWithLangPrefixed[0];
   const entropyLength: number = entropyWithLangPrefixed[1];
-  /*check(
+  check(
     // eslint-disable-next-line eqeqeq
     langCode == 1 && [16, 20, 24, 28, 32].includes(entropyLength),
     'invalid entropy',
-  );*/
-  /*return bip39.entropyToMnemonic(
+  );
+  return bip39.entropyToMnemonic(
     entropyWithLangPrefixed.slice(2, 2 + entropyLength),
     bip39.wordlists.english,
-  );*/
-  return entropyWithLangPrefixed.toString()
+  );
 }
 
 export { mnemonicToRevealableSeed, serectToRevealableSeed, revealEntropy };
