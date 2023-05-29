@@ -29,7 +29,7 @@ const Container: ForwardRefRenderFunction<
     onRefresh,
     initialTabName,
     containerStyle,
-    scrollEnabled = false,
+    scrollEnabled = true,
     ...props
   },
   ref,
