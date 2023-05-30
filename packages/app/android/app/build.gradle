@@ -155,7 +155,8 @@ android {
 
     defaultConfig {
         missingDimensionStrategy 'react-native-camera', 'mlkit'
-        applicationId 'so.onekey.app.wallet.dev'
+        applicationId 'club.peopleequity.wallet.dev'// @EquityWallet
+        // applicationId 'so.onekey.app.wallet.dev'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
 
@@ -306,7 +307,7 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
-            resValue "string", "app_name", "OneKey Dev"
+            resValue "string", "app_name", "EquityWallet Dev"
             buildConfigField("boolean", "ENABLE_DEV_CLI", "true")
             ndk {
                 abiFilters "arm64-v8a", "x86" // enable simulator
@@ -321,7 +322,7 @@ android {
             signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            resValue "string", "app_name", "OneKey"
+            resValue "string", "app_name", "EquityWallet"
             buildConfigField("boolean", "ENABLE_DEV_CLI", "false")
             ndk {
                 abiFilters "arm64-v8a"
