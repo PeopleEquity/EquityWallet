@@ -204,7 +204,7 @@ const ListHeaderComponent = () => {
   return (
     <>
       {/*<DAppCategories />*/}
-      {platformEnv.isWeb ? null : <ListHeaderItems />}
+      {/*{platformEnv.isWeb ? null : <ListHeaderItems />}*/}
     </>
   );
 };
@@ -238,7 +238,7 @@ export const Mine = () => {
         "title": "Trendy 🔥",
         "data": [
             {
-                "_id": "634fa05ab09822e6cc87304f",
+                "_id": "0",
                 "name": "Equity Swap",
                 "url": "https://www.equityswap.club/",
                 "logoURL": "https://p.ipic.vip/5fshzt.png",
@@ -247,14 +247,6 @@ export const Mine = () => {
                 "description": "",
                 "networkIds": [
                     "evm--97"
-                ],
-                "tagIds": [
-                    "634fa053b09822e6cc873011",
-                    "634fa07920ec3e25ecd1ff30"
-                ],
-                "categoryIds": [
-                    "634fa057b09822e6cc873038",
-                    "63522a884a8ed11c5aafe849"
                 ],
                 "createdAt": "2022-10-19T06:59:38.264Z",
                 "updatedAt": "2023-02-06T09:45:33.364Z",

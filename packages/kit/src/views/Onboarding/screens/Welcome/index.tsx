@@ -153,15 +153,15 @@ const Welcome = () => {
 
   const options = useMemo(() => {
     return [{
-      title: 'secret',
-      label: 'secret',
-      value: 'secret',
+      title: 'Create Wallet',
+      label: intl.formatMessage({ id: 'action__create_wallet_serect' }),
+      value: 'serect',
     }, {
-      title: 'phrase',
-      label: 'phrase',
+      title: 'Create Wallet',
+      label: intl.formatMessage({ id: 'action__create_wallet_phrase' }),
       value: 'phrase',
     },]
-  }, []);
+  }, [intl]);
 
   return (
     <>
@@ -190,7 +190,7 @@ const Welcome = () => {
           mt={{ base: isSmallHeight ? 8 : 66, sm: 20 }}
           mx={-2}
         >
-          <Box flexDirection={{ sm: 'row' }} w={{ sm: '100%' }} gap={'16px'} justifyContent={'center'}>
+          <Box flexDirection={{ sm: 'row' }} w={{ sm: '100%' }} alignItems={'center'} justifyContent={'center'}>
             <Select
                 containerProps={{
                   width: '100%',
@@ -213,6 +213,7 @@ const Welcome = () => {
                     </Button>
                 )}
             />
+            <Box w={'16px'} h={'16px'} />
             <Button width={'100%'} maxWidth={'350px'} size="xl" type="basic2" onPress={onPressImportWallet} key="importWallet">
               {intl.formatMessage({ id: 'action__import_wallet' })}
             </Button>

@@ -310,7 +310,7 @@ function revealableSeedFromSerect(
     entropyWithLangPrefixed: Buffer.from(mnemonic),
     seed: bip39.mnemonicToSeedSync(mnemonic, '')
   }
-  console.log('rs', rs)
+
   return {
     entropyWithLangPrefixed: encryptor.encrypt(
         password,

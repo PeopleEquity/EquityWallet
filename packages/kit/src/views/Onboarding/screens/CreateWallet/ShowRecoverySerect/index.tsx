@@ -58,22 +58,32 @@ const ShowRecoverySerect = () => {
 
   return (
     <Layout
-      title={intl.formatMessage({ id: 'content__click_below_to_copy' })}
-      description={intl.formatMessage({
-        id: 'modal__for_your_eyes_only_desc',
-      })}
+      title={
+        step === 0 ?
+            intl.formatMessage({ id: 'content__modify_your_ciphertext_password' }) :
+            intl.formatMessage({ id: 'content__verify_your_ciphertext_password' })
+      }
+      description={
+        step === 0 ?
+            intl.formatMessage({
+              id: 'content__modify_your_ciphertext_password_desc',
+            }) :
+            intl.formatMessage({
+              id: 'content__verify_your_ciphertext_password_desc',
+            })
+      }
       fullHeight
       secondaryContent={
         step === 0 ?
             <Box alignSelf="stretch" flex={1}>
-              <Text typography="Body2" color="text-default" textAlign="left" mb={4}>
-                {intl.formatMessage({ id: 'content__save_phrase_securely' })}
-              </Text>
               <Box flex={1} mb={8}>
                 <Box p={4} borderWidth={'1px'} borderColor={'#E7E8F3'} borderRadius={'16px'}>
                   <TextInput
                       ref={textRef}
-                      style={styles.textInput}
+                      style={{
+                        ...styles.textInput,
+                        color: 'text-default'
+                      }}
                       multiline
                       maxLength={2048}
                       value={value}
@@ -119,16 +129,15 @@ const ShowRecoverySerect = () => {
                   type="primary"
                   size={isVerticalLayout ? 'xl' : 'base'}
                   onPress={() => {
-                    setStep(step + 1)
+                    if (value.length >= 64) {
+                      setStep(step + 1)
+                    }
                   }}
               >
-                {intl.formatMessage({ id: 'action__i_have_saved_the_phrase' })}
+                {intl.formatMessage({ id: 'action__next' })}
               </Button>
             </Box> :
             <Box alignSelf="stretch" flex={1}>
-              <Text typography="Body2" color="text-default" textAlign="left" mb={4}>
-                {intl.formatMessage({ id: 'content__save_phrase_securely' })} 2
-              </Text>
               <Box flex={1} mb={8}>
                 <Box p={4} borderWidth={'1px'} borderColor={'#E7E8F3'} borderRadius={'16px'}>
                   <TextInput
@@ -182,7 +191,7 @@ const ShowRecoverySerect = () => {
                     }
                   }}
               >
-                {intl.formatMessage({ id: 'action__i_have_saved_the_phrase' })}
+                {intl.formatMessage({ id: 'action__generate_your_wallet' })}
               </Button>
             </Box>
       }

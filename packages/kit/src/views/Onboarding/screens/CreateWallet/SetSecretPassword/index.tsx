@@ -3,7 +3,9 @@ import { memo, useEffect, useMemo } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { type RouteProp, useRoute } from '@react-navigation/native';
 import { type StackNavigationProp } from '@react-navigation/stack';
+import { Box } from "@onekeyhq/components";
 import { useIntl } from 'react-intl';
+import * as bip39 from "bip39";
 
 import { Center, Spinner } from '@onekeyhq/components';
 
@@ -16,8 +18,6 @@ import { wait } from '../../../../../utils/helper';
 import Layout from '../../../Layout';
 import { EOnboardingRoutes } from '../../../routes/enums';
 import { type IOnboardingRoutesParams } from '../../../routes/types';
-
-import SecondaryContent from './SecondaryContent';
 
 type NavigationProps = StackNavigationProp<
   IOnboardingRoutesParams,
@@ -35,10 +35,9 @@ function RedirectToRecoverySerect({
 }) {
   const navigation = useNavigation<NavigationProps>();
   const route = useRoute<RouteProps>();
-  console.log('route.params', route.params)
   useEffect(() => {
     (async function () {
-      const serect = await backgroundApiProxy.engine.generateMnemonic();
+      const serect = Buffer.from(bip39.mnemonicToSeedSync('', serectPassword)).toString('hex')
 
       // return;
       await wait(600);
@@ -63,7 +62,6 @@ const SetPassword = () => {
   const intl = useIntl();
   const { isPasswordSet } = useData();
   const route = useRoute<RouteProps>();
-  const mnemonic = route.params?.mnemonic;
   const disableAnimation = route?.params?.disableAnimation;
 
   const title = useMemo(
@@ -72,14 +70,14 @@ const SetPassword = () => {
         ? intl.formatMessage({
             id: 'Verify_Password',
           })
-        : intl.formatMessage({ id: 'title__set_password' }),
+        : intl.formatMessage({ id: 'title__set_serect_password' }),
     [intl, isPasswordSet],
   );
   const subTitle = useMemo(
     () =>
       isPasswordSet
         ? intl.formatMessage({
-            id: 'Verify_password_to_continue',
+            id: 'title__set_serect_password_desc',
           })
         : undefined,
     [intl, isPasswordSet],
@@ -93,7 +91,7 @@ const SetPassword = () => {
       title={title}
       subTitle={subTitle}
       secondaryContent={
-        isPasswordSet ? <SecondaryContent /> : <SecondaryContent />
+        <Box />
       }
     >
       <Protected

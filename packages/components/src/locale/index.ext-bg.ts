@@ -1,4 +1,4 @@
-import platformEnv from '@OneKeyhq/shared/src/platformEnv';
+import platformEnv from '@onekeyhq/shared/src/platformEnv';
 
 const enUS = {
   'Confirm_password': 'Confirm Password',

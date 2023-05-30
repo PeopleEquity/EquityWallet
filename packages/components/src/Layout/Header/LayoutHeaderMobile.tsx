@@ -12,7 +12,6 @@ import { NetworkSelectorTrigger } from "@onekeyhq/kit/src/components/NetworkAcco
 import {SendRoutes, SendRoutesParams} from "@onekeyhq/kit/src/views/Send/types";
 import {useNavigationState} from "@react-navigation/core";
 
-
 const headerLeft = () => {
   const { wallet } = useActiveWalletAccount();
   const isVerticalLayout = useIsVerticalLayout();

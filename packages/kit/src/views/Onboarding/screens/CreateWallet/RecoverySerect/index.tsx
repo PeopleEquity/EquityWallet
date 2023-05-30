@@ -40,27 +40,27 @@ const RecoverySerect = () => {
           before: '⭕',
           type: 'decorative',
           icon: 'LockClosedOutline',
-          para: intl.formatMessage({ id: 'modal__attention_unlock' }),
+          para: intl.formatMessage({ id: 'modal__attention_serect_1' }),
         },
         {
           before: '🔔',
           type: 'decorative',
           icon: 'DotsCircleHorizontalOutline',
-          para: intl.formatMessage({ id: 'content__recovery_phrase_restore' }),
+          para: intl.formatMessage({ id: 'modal__attention_serect_2' }),
         },
         {
           before: '🔴',
           type: 'warning',
           icon: 'ShieldCheckOutline',
           para: intl.formatMessage({
-            id: 'backup__manual_backup_warning_never_ask',
+            id: 'modal__attention_serect_3',
           }),
         },
         {
           before: '🚫️',
           type: 'critical',
           icon: 'EyeSlashOutline',
-          para: intl.formatMessage({ id: 'modal__attention_shh' }),
+          para: intl.formatMessage({ id: 'modal__attention_serect_4' }),
         },
       ] as const,
     [intl],
@@ -68,8 +68,8 @@ const RecoverySerect = () => {
 
   return (
     <Layout
-      title={intl.formatMessage({ id: 'title__recovery_phrase' })}
-      description={intl.formatMessage({ id: 'title__recovery_phrase_desc' })}
+      title={intl.formatMessage({ id: 'title__recovery_serect' })}
+      description={intl.formatMessage({ id: 'title__recovery_serect_desc' })}
       secondaryContent={
         <SecondaryContent
           onPressSavedPhrase={onPressSavedPhrase}
