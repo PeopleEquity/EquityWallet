@@ -38,6 +38,8 @@ import AccountInfo, {
 import AssetsList from './AssetsList';
 import BackupToast from './BackupToast';
 import NFTList from './NFT/NFTList';
+import DCFiPage from './DCFi';
+import DCSPage from './DCS';
 import ToolsPage from './Tools';
 import { HomeTabIndex, HomeTabOrder, WalletHomeTabEnum } from './type';
 
@@ -159,13 +161,13 @@ const WalletTabs: FC = () => {
             name={WalletHomeTabEnum.DcFi}
             label={'DCFi'}
         >
-          <NFTList />
+          <DCFiPage />
         </Tabs.Tab>
         <Tabs.Tab
             name={WalletHomeTabEnum.Dcs}
             label={'DCS'}
         >
-          <NFTList />
+          <DCSPage />
         </Tabs.Tab>
         <Tabs.Tab
             name={WalletHomeTabEnum.Tools}

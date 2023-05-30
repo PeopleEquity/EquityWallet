@@ -204,7 +204,7 @@ const ListHeaderComponent = () => {
   return (
     <>
       {/*<DAppCategories />*/}
-      {platformEnv.isWeb ? null : <ListHeaderItems />}
+      {/*{platformEnv.isWeb ? null : <ListHeaderItems />}*/}
     </>
   );
 };

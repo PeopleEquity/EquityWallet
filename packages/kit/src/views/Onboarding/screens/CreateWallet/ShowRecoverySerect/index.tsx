@@ -80,7 +80,10 @@ const ShowRecoverySerect = () => {
                 <Box p={4} borderWidth={'1px'} borderColor={'#E7E8F3'} borderRadius={'16px'}>
                   <TextInput
                       ref={textRef}
-                      style={styles.textInput}
+                      style={{
+                        ...styles.textInput,
+                        color: 'text-default'
+                      }}
                       multiline
                       maxLength={2048}
                       value={value}
