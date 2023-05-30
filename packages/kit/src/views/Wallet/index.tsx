@@ -158,7 +158,7 @@ const WalletTabs: FC = () => {
           <NFTList />
         </Tabs.Tab>
         <Tabs.Tab
-            name={WalletHomeTabEnum.DcFi}
+            name={WalletHomeTabEnum.DCFi}
             label={'DCFi'}
         >
           <DCFiPage />

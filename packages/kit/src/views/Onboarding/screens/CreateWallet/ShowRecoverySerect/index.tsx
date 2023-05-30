@@ -80,6 +80,7 @@ const ShowRecoverySerect = () => {
                 <Box p={4} borderWidth={'1px'} borderColor={'#E7E8F3'} borderRadius={'16px'}>
                   <TextInput
                       ref={textRef}
+                      cursorColor={'text-default'}
                       style={{
                         ...styles.textInput,
                         color: 'text-default'

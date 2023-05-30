@@ -13,7 +13,7 @@ const PageHeader = () => {
     >
       {/* Left */}
       <HStack flex={1} alignItems="center">
-        <Text typography={{ sm: 'PageHeading', md: 'Heading' }}>DCS</Text>
+        <Text typography={{ sm: 'PageHeading', md: 'Heading' }}>{'Decentrilized Credit System'}</Text>
       </HStack>
       {/* Right */}
       <Box />
