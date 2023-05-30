@@ -12,7 +12,7 @@ import { EOnboardingRoutes } from '../../../routes/enums';
 import type { IOnboardingRoutesParams } from '../../../routes/types';
 import type { RouteProp } from '@react-navigation/native';
 import type { StackNavigationProp } from '@react-navigation/stack';
-import {Box, Button, Text, useIsVerticalLayout} from "@onekeyhq/components";
+import {Box, Button, Text, useIsVerticalLayout, useTheme} from "@onekeyhq/components";
 import {wait} from "../../../../../utils/helper";
 
 const styles = StyleSheet.create({
@@ -39,6 +39,7 @@ const ShowRecoverySerect = () => {
   const route = useRoute<RouteProps>();
   const [step, setStep] = useState(0);
   const { serect } = route.params;
+  const { isDark } = useTheme();
 
   const [value, setValue] = useState(serect);
   const [newValue, setNewValue] = useState(serect);
@@ -80,10 +81,9 @@ const ShowRecoverySerect = () => {
                 <Box p={4} borderWidth={'1px'} borderColor={'#E7E8F3'} borderRadius={'16px'}>
                   <TextInput
                       ref={textRef}
-                      cursorColor={'text-default'}
                       style={{
                         ...styles.textInput,
-                        color: 'text-default'
+                        color: isDark ? '#ffffff' : '#000000'
                       }}
                       multiline
                       maxLength={2048}
@@ -143,7 +143,10 @@ const ShowRecoverySerect = () => {
                 <Box p={4} borderWidth={'1px'} borderColor={'#E7E8F3'} borderRadius={'16px'}>
                   <TextInput
                       ref={text2Ref}
-                      style={styles.textInput}
+                      style={{
+                        ...styles.textInput,
+                        color: isDark ? '#ffffff' : '#000000'
+                      }}
                       multiline
                       maxLength={2048}
                       value={newValue}

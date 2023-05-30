@@ -10,6 +10,8 @@ export enum WalletHomeTabEnum {
 export const HomeTabOrder = [
   WalletHomeTabEnum.Tokens,
   WalletHomeTabEnum.Collectibles,
+  WalletHomeTabEnum.DCFi,
+  WalletHomeTabEnum.Dcs,
   WalletHomeTabEnum.History,
   WalletHomeTabEnum.Tools,
 ];
@@ -17,6 +19,8 @@ export const HomeTabOrder = [
 export const HomeTabIndex = {
   [WalletHomeTabEnum.Tokens]: 0,
   [WalletHomeTabEnum.Collectibles]: 1,
-  [WalletHomeTabEnum.History]: 2,
-  [WalletHomeTabEnum.Tools]: 3,
+  [WalletHomeTabEnum.DCFi]: 2,
+  [WalletHomeTabEnum.Dcs]: 3,
+  [WalletHomeTabEnum.History]: 4,
+  [WalletHomeTabEnum.Tools]: 5,
 };
