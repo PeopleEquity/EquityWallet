@@ -373,17 +373,7 @@ const BehindTheScene = () => {
         onPressOnboardingFinished={onPressFinished}
         setIsNavBackDisabled={setIsNavBackDisabled}
       />
-      <Box
-          flex={1}
-          h="full"
-          w="full"
-          // TODO how to make webview fullscreen?
-          minH={{ base: 480, sm: 320 }}
-          justifyContent="flex-end"
-      >
-        {builtInAutoTyping}
-      </Box>
-      {/*{isRenderAsWebview ? (
+      {isRenderAsWebview ? (
         <Center h="full" w="full">
           {webviewAutoTyping}
         </Center>
@@ -398,7 +388,7 @@ const BehindTheScene = () => {
         >
           {builtInAutoTyping}
         </Box>
-      )}*/}
+      )}
     </Layout>
   );
 };
